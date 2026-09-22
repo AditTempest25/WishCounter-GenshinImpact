@@ -23,7 +23,7 @@ class PityService
                 ->where('uigf_gacha_type', $type)
                 ->orderByDesc('wish_time')
                 ->orderByDesc('wish_id')
-                ->get(['wish_id', 'item_name', 'item_type', 'rank_type', 'wish_time']);
+                ->get(['wish_id', 'item_id', 'item_name', 'item_type', 'rank_type', 'wish_time']);
 
             $pity = 0;
             $lastFiveStar = null;
@@ -32,6 +32,7 @@ class PityService
                 if ((int) $wish->rank_type === 5) {
                     $lastFiveStar = [
                         'name' => $wish->item_name,
+                        'item_id' => $wish->item_id,
                         'item_type' => $wish->item_type,
                         'time' => $wish->wish_time,
                     ];

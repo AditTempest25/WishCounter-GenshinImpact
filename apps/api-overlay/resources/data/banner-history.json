@@ -1,0 +1,2571 @@
+{
+  "banners": [
+    {
+      "group": "301",
+      "end": "2020-10-18",
+      "featured": [
+        "venti"
+      ],
+      "start": "2020-09-28"
+    },
+    {
+      "group": "301",
+      "end": "2020-11-10",
+      "featured": [
+        "klee"
+      ],
+      "start": "2020-10-20"
+    },
+    {
+      "group": "301",
+      "end": "2020-12-01",
+      "featured": [
+        "tartaglia"
+      ],
+      "start": "2020-11-11"
+    },
+    {
+      "group": "301",
+      "end": "2020-12-22",
+      "featured": [
+        "zhongli"
+      ],
+      "start": "2020-12-01"
+    },
+    {
+      "group": "301",
+      "end": "2021-01-12",
+      "featured": [
+        "albedo"
+      ],
+      "start": "2020-12-23"
+    },
+    {
+      "group": "301",
+      "end": "2021-02-02",
+      "featured": [
+        "ganyu"
+      ],
+      "start": "2021-01-12"
+    },
+    {
+      "group": "301",
+      "end": "2021-02-17",
+      "featured": [
+        "xiao"
+      ],
+      "start": "2021-02-03"
+    },
+    {
+      "group": "301",
+      "end": "2021-03-02",
+      "featured": [
+        "keqing"
+      ],
+      "start": "2021-02-17"
+    },
+    {
+      "group": "301",
+      "end": "2021-03-16",
+      "featured": [
+        "hutao"
+      ],
+      "start": "2021-03-02"
+    },
+    {
+      "group": "301",
+      "end": "2021-04-06",
+      "featured": [
+        "venti"
+      ],
+      "start": "2021-03-17"
+    },
+    {
+      "group": "301",
+      "end": "2021-04-27",
+      "featured": [
+        "tartaglia"
+      ],
+      "start": "2021-04-06"
+    },
+    {
+      "group": "301",
+      "end": "2021-05-18",
+      "featured": [
+        "zhongli"
+      ],
+      "start": "2021-04-28"
+    },
+    {
+      "group": "301",
+      "end": "2021-06-08",
+      "featured": [
+        "eula"
+      ],
+      "start": "2021-05-18"
+    },
+    {
+      "group": "301",
+      "end": "2021-06-29",
+      "featured": [
+        "klee"
+      ],
+      "start": "2021-06-09"
+    },
+    {
+      "group": "301",
+      "end": "2021-07-20",
+      "featured": [
+        "kaedeharakazuha"
+      ],
+      "start": "2021-06-29"
+    },
+    {
+      "group": "301",
+      "end": "2021-08-10",
+      "featured": [
+        "kamisatoayaka"
+      ],
+      "start": "2021-07-21"
+    },
+    {
+      "group": "301",
+      "end": "2021-08-31",
+      "featured": [
+        "yoimiya"
+      ],
+      "start": "2021-08-10"
+    },
+    {
+      "group": "301",
+      "end": "2021-09-21",
+      "featured": [
+        "raidenshogun"
+      ],
+      "start": "2021-09-01"
+    },
+    {
+      "group": "301",
+      "end": "2021-10-12",
+      "featured": [
+        "sangonomiyakokomi"
+      ],
+      "start": "2021-09-21"
+    },
+    {
+      "group": "301",
+      "end": "2021-11-02",
+      "featured": [
+        "tartaglia"
+      ],
+      "start": "2021-10-13"
+    },
+    {
+      "group": "301",
+      "end": "2021-11-23",
+      "featured": [
+        "hutao"
+      ],
+      "start": "2021-11-02"
+    },
+    {
+      "group": "301",
+      "end": "2021-12-14",
+      "featured": [
+        "albedo",
+        "eula"
+      ],
+      "start": "2021-11-24"
+    },
+    {
+      "group": "301",
+      "end": "2021-12-14",
+      "featured": [
+        "eula"
+      ],
+      "start": "2021-11-24"
+    },
+    {
+      "group": "301",
+      "end": "2022-01-04",
+      "featured": [
+        "aratakiitto"
+      ],
+      "start": "2021-12-14"
+    },
+    {
+      "group": "301",
+      "end": "2022-01-25",
+      "featured": [
+        "shenhe",
+        "xiao"
+      ],
+      "start": "2022-01-05"
+    },
+    {
+      "group": "301",
+      "end": "2022-01-25",
+      "featured": [
+        "shenhe",
+        "xiao"
+      ],
+      "start": "2022-01-05"
+    },
+    {
+      "group": "301",
+      "end": "2022-02-15",
+      "featured": [
+        "zhongli",
+        "ganyu"
+      ],
+      "start": "2022-01-25"
+    },
+    {
+      "group": "301",
+      "end": "2022-02-15",
+      "featured": [
+        "zhongli",
+        "ganyu"
+      ],
+      "start": "2022-01-25"
+    },
+    {
+      "group": "301",
+      "end": "2022-03-08",
+      "featured": [
+        "yaemiko"
+      ],
+      "start": "2022-02-16"
+    },
+    {
+      "group": "301",
+      "end": "2022-03-29",
+      "featured": [
+        "raidenshogun",
+        "sangonomiyakokomi"
+      ],
+      "start": "2022-03-08"
+    },
+    {
+      "group": "301",
+      "end": "2022-03-29",
+      "featured": [
+        "raidenshogun",
+        "sangonomiyakokomi"
+      ],
+      "start": "2022-03-08"
+    },
+    {
+      "group": "301",
+      "end": "2022-04-19",
+      "featured": [
+        "kamisatoayato",
+        "venti"
+      ],
+      "start": "2022-03-30"
+    },
+    {
+      "group": "301",
+      "end": "2022-04-19",
+      "featured": [
+        "kamisatoayato",
+        "venti"
+      ],
+      "start": "2022-03-30"
+    },
+    {
+      "group": "301",
+      "end": "2022-05-31",
+      "featured": [
+        "kamisatoayaka"
+      ],
+      "start": "2022-04-19"
+    },
+    {
+      "group": "301",
+      "end": "2022-06-21",
+      "featured": [
+        "yelan",
+        "xiao"
+      ],
+      "start": "2022-05-31"
+    },
+    {
+      "group": "301",
+      "end": "2022-06-21",
+      "featured": [
+        "yelan",
+        "xiao"
+      ],
+      "start": "2022-05-31"
+    },
+    {
+      "group": "301",
+      "end": "2022-07-12",
+      "featured": [
+        "aratakiitto"
+      ],
+      "start": "2022-06-21"
+    },
+    {
+      "group": "301",
+      "end": "2022-08-02",
+      "featured": [
+        "kaedeharakazuha",
+        "klee"
+      ],
+      "start": "2022-07-13"
+    },
+    {
+      "group": "301",
+      "end": "2022-08-02",
+      "featured": [
+        "kaedeharakazuha",
+        "klee"
+      ],
+      "start": "2022-07-13"
+    },
+    {
+      "group": "301",
+      "end": "2022-08-23",
+      "featured": [
+        "yoimiya"
+      ],
+      "start": "2022-08-02"
+    },
+    {
+      "group": "301",
+      "end": "2022-09-09",
+      "featured": [
+        "tighnari",
+        "zhongli"
+      ],
+      "start": "2022-08-24"
+    },
+    {
+      "group": "301",
+      "end": "2022-09-09",
+      "featured": [
+        "tighnari",
+        "zhongli"
+      ],
+      "start": "2022-08-24"
+    },
+    {
+      "group": "301",
+      "end": "2022-09-27",
+      "featured": [
+        "ganyu",
+        "sangonomiyakokomi"
+      ],
+      "start": "2022-09-09"
+    },
+    {
+      "group": "301",
+      "end": "2022-09-27",
+      "featured": [
+        "ganyu",
+        "sangonomiyakokomi"
+      ],
+      "start": "2022-09-09"
+    },
+    {
+      "group": "301",
+      "end": "2022-10-14",
+      "featured": [
+        "cyno",
+        "venti"
+      ],
+      "start": "2022-09-28"
+    },
+    {
+      "group": "301",
+      "end": "2022-10-14",
+      "featured": [
+        "cyno",
+        "venti"
+      ],
+      "start": "2022-09-28"
+    },
+    {
+      "group": "301",
+      "end": "2022-11-01",
+      "featured": [
+        "nilou",
+        "albedo"
+      ],
+      "start": "2022-10-14"
+    },
+    {
+      "group": "301",
+      "end": "2022-11-01",
+      "featured": [
+        "nilou",
+        "albedo"
+      ],
+      "start": "2022-10-14"
+    },
+    {
+      "group": "301",
+      "end": "2022-11-18",
+      "featured": [
+        "nahida",
+        "yoimiya"
+      ],
+      "start": "2022-11-02"
+    },
+    {
+      "group": "301",
+      "end": "2022-11-18",
+      "featured": [
+        "nahida",
+        "yoimiya"
+      ],
+      "start": "2022-11-02"
+    },
+    {
+      "group": "301",
+      "end": "2022-12-06",
+      "featured": [
+        "yaemiko",
+        "tartaglia"
+      ],
+      "start": "2022-11-18"
+    },
+    {
+      "group": "301",
+      "end": "2022-12-06",
+      "featured": [
+        "yaemiko",
+        "tartaglia"
+      ],
+      "start": "2022-11-18"
+    },
+    {
+      "group": "301",
+      "end": "2022-12-27",
+      "featured": [
+        "wanderer",
+        "aratakiitto"
+      ],
+      "start": "2022-12-07"
+    },
+    {
+      "group": "301",
+      "end": "2022-12-27",
+      "featured": [
+        "wanderer",
+        "aratakiitto"
+      ],
+      "start": "2022-12-07"
+    },
+    {
+      "group": "301",
+      "end": "2023-01-17",
+      "featured": [
+        "raidenshogun",
+        "kamisatoayato"
+      ],
+      "start": "2022-12-27"
+    },
+    {
+      "group": "301",
+      "end": "2023-01-17",
+      "featured": [
+        "raidenshogun",
+        "kamisatoayato"
+      ],
+      "start": "2022-12-27"
+    },
+    {
+      "group": "301",
+      "end": "2023-02-07",
+      "featured": [
+        "alhaitham",
+        "xiao"
+      ],
+      "start": "2023-01-18"
+    },
+    {
+      "group": "301",
+      "end": "2023-02-07",
+      "featured": [
+        "alhaitham",
+        "xiao"
+      ],
+      "start": "2023-01-18"
+    },
+    {
+      "group": "301",
+      "end": "2023-02-28",
+      "featured": [
+        "hutao",
+        "yelan"
+      ],
+      "start": "2023-02-07"
+    },
+    {
+      "group": "301",
+      "end": "2023-02-28",
+      "featured": [
+        "hutao",
+        "yelan"
+      ],
+      "start": "2023-02-07"
+    },
+    {
+      "group": "301",
+      "end": "2023-03-21",
+      "featured": [
+        "dehya",
+        "cyno"
+      ],
+      "start": "2023-03-01"
+    },
+    {
+      "group": "301",
+      "end": "2023-03-21",
+      "featured": [
+        "dehya",
+        "cyno"
+      ],
+      "start": "2023-03-01"
+    },
+    {
+      "group": "301",
+      "end": "2023-04-11",
+      "featured": [
+        "shenhe",
+        "kamisatoayaka"
+      ],
+      "start": "2023-03-21"
+    },
+    {
+      "group": "301",
+      "end": "2023-04-11",
+      "featured": [
+        "shenhe",
+        "kamisatoayaka"
+      ],
+      "start": "2023-03-21"
+    },
+    {
+      "group": "301",
+      "end": "2023-05-02",
+      "featured": [
+        "nahida",
+        "nilou"
+      ],
+      "start": "2023-04-12"
+    },
+    {
+      "group": "301",
+      "end": "2023-05-02",
+      "featured": [
+        "nahida",
+        "nilou"
+      ],
+      "start": "2023-04-12"
+    },
+    {
+      "group": "301",
+      "end": "2023-05-23",
+      "featured": [
+        "baizhu",
+        "ganyu"
+      ],
+      "start": "2023-05-02"
+    },
+    {
+      "group": "301",
+      "end": "2023-05-02",
+      "featured": [
+        "baizhu",
+        "ganyu"
+      ],
+      "start": "2023-04-12"
+    },
+    {
+      "group": "301",
+      "end": "2023-06-13",
+      "featured": [
+        "yoimiya",
+        "yaemiko"
+      ],
+      "start": "2023-05-24"
+    },
+    {
+      "group": "301",
+      "end": "2023-06-13",
+      "featured": [
+        "yoimiya",
+        "yaemiko"
+      ],
+      "start": "2023-05-24"
+    },
+    {
+      "group": "301",
+      "end": "2023-07-04",
+      "featured": [
+        "alhaitham",
+        "kaedeharakazuha"
+      ],
+      "start": "2023-06-13"
+    },
+    {
+      "group": "301",
+      "end": "2023-07-04",
+      "featured": [
+        "alhaitham",
+        "kaedeharakazuha"
+      ],
+      "start": "2023-06-13"
+    },
+    {
+      "group": "301",
+      "end": "2023-07-25",
+      "featured": [
+        "eula",
+        "klee"
+      ],
+      "start": "2023-07-05"
+    },
+    {
+      "group": "301",
+      "end": "2023-07-25",
+      "featured": [
+        "eula",
+        "klee"
+      ],
+      "start": "2023-07-05"
+    },
+    {
+      "group": "301",
+      "end": "2023-08-15",
+      "featured": [
+        "sangonomiyakokomi",
+        "wanderer"
+      ],
+      "start": "2023-07-25"
+    },
+    {
+      "group": "301",
+      "end": "2023-08-15",
+      "featured": [
+        "sangonomiyakokomi",
+        "wanderer"
+      ],
+      "start": "2023-07-25"
+    },
+    {
+      "group": "301",
+      "end": "2023-09-05",
+      "featured": [
+        "lyney",
+        "yelan"
+      ],
+      "start": "2023-08-16"
+    },
+    {
+      "group": "301",
+      "end": "2023-09-05",
+      "featured": [
+        "lyney",
+        "yelan"
+      ],
+      "start": "2023-08-16"
+    },
+    {
+      "group": "301",
+      "end": "2023-09-26",
+      "featured": [
+        "tartaglia",
+        "zhongli"
+      ],
+      "start": "2023-09-05"
+    },
+    {
+      "group": "301",
+      "end": "2023-09-26",
+      "featured": [
+        "tartaglia",
+        "zhongli"
+      ],
+      "start": "2023-09-05"
+    },
+    {
+      "group": "301",
+      "end": "2023-10-17",
+      "featured": [
+        "neuvillette",
+        "hutao"
+      ],
+      "start": "2023-09-27"
+    },
+    {
+      "group": "301",
+      "end": "2023-10-17",
+      "featured": [
+        "neuvillette",
+        "hutao"
+      ],
+      "start": "2023-09-27"
+    },
+    {
+      "group": "301",
+      "end": "2023-11-07",
+      "featured": [
+        "wriothesley",
+        "venti"
+      ],
+      "start": "2023-10-17"
+    },
+    {
+      "group": "301",
+      "end": "2023-11-07",
+      "featured": [
+        "wriothesley",
+        "venti"
+      ],
+      "start": "2023-10-17"
+    },
+    {
+      "group": "301",
+      "end": "2023-11-28",
+      "featured": [
+        "furina",
+        "baizhu"
+      ],
+      "start": "2023-11-08"
+    },
+    {
+      "group": "301",
+      "end": "2023-11-28",
+      "featured": [
+        "furina",
+        "baizhu"
+      ],
+      "start": "2023-11-08"
+    },
+    {
+      "group": "301",
+      "end": "2023-12-19",
+      "featured": [
+        "cyno",
+        "kamisatoayato"
+      ],
+      "start": "2023-11-28"
+    },
+    {
+      "group": "301",
+      "end": "2023-12-19",
+      "featured": [
+        "cyno",
+        "kamisatoayato"
+      ],
+      "start": "2023-11-28"
+    },
+    {
+      "group": "301",
+      "end": "2024-01-09",
+      "featured": [
+        "navia",
+        "kamisatoayaka"
+      ],
+      "start": "2023-12-20"
+    },
+    {
+      "group": "301",
+      "end": "2024-01-09",
+      "featured": [
+        "navia",
+        "kamisatoayaka"
+      ],
+      "start": "2023-12-20"
+    },
+    {
+      "group": "301",
+      "end": "2024-01-30",
+      "featured": [
+        "raidenshogun",
+        "yoimiya"
+      ],
+      "start": "2024-01-09"
+    },
+    {
+      "group": "301",
+      "end": "2024-01-30",
+      "featured": [
+        "raidenshogun",
+        "yoimiya"
+      ],
+      "start": "2024-01-09"
+    },
+    {
+      "group": "301",
+      "end": "2024-02-20",
+      "featured": [
+        "xianyun",
+        "nahida"
+      ],
+      "start": "2024-01-31"
+    },
+    {
+      "group": "301",
+      "end": "2024-02-20",
+      "featured": [
+        "xianyun",
+        "nahida"
+      ],
+      "start": "2024-01-31"
+    },
+    {
+      "group": "301",
+      "end": "2024-03-12",
+      "featured": [
+        "xiao",
+        "yaemiko"
+      ],
+      "start": "2024-02-20"
+    },
+    {
+      "group": "301",
+      "end": "2024-03-12",
+      "featured": [
+        "xiao",
+        "yaemiko"
+      ],
+      "start": "2024-02-20"
+    },
+    {
+      "group": "301",
+      "end": "2024-04-02",
+      "featured": [
+        "chiori",
+        "aratakiitto"
+      ],
+      "start": "2024-03-13"
+    },
+    {
+      "group": "301",
+      "end": "2024-04-02",
+      "featured": [
+        "chiori",
+        "aratakiitto"
+      ],
+      "start": "2024-03-13"
+    },
+    {
+      "group": "301",
+      "end": "2024-04-23",
+      "featured": [
+        "neuvillette",
+        "kaedeharakazuha"
+      ],
+      "start": "2024-04-02"
+    },
+    {
+      "group": "301",
+      "end": "2024-04-23",
+      "featured": [
+        "neuvillette",
+        "kaedeharakazuha"
+      ],
+      "start": "2024-04-02"
+    },
+    {
+      "group": "301",
+      "end": "2024-05-14",
+      "featured": [
+        "arlecchino",
+        "lyney"
+      ],
+      "start": "2024-04-24"
+    },
+    {
+      "group": "301",
+      "end": "2024-05-14",
+      "featured": [
+        "arlecchino",
+        "lyney"
+      ],
+      "start": "2024-04-24"
+    },
+    {
+      "group": "301",
+      "end": "2024-06-04",
+      "featured": [
+        "wanderer",
+        "baizhu"
+      ],
+      "start": "2024-05-14"
+    },
+    {
+      "group": "301",
+      "end": "2024-06-04",
+      "featured": [
+        "wanderer",
+        "baizhu"
+      ],
+      "start": "2024-05-14"
+    },
+    {
+      "group": "301",
+      "end": "2024-06-25",
+      "featured": [
+        "clorinde",
+        "alhaitham"
+      ],
+      "start": "2024-06-05"
+    },
+    {
+      "group": "301",
+      "end": "2024-06-25",
+      "featured": [
+        "clorinde",
+        "alhaitham"
+      ],
+      "start": "2024-06-05"
+    },
+    {
+      "group": "301",
+      "end": "2024-07-16",
+      "featured": [
+        "sigewinne",
+        "furina"
+      ],
+      "start": "2024-06-25"
+    },
+    {
+      "group": "301",
+      "end": "2024-07-16",
+      "featured": [
+        "sigewinne",
+        "furina"
+      ],
+      "start": "2024-06-25"
+    },
+    {
+      "group": "301",
+      "end": "2024-08-06",
+      "featured": [
+        "navia",
+        "nilou"
+      ],
+      "start": "2024-07-17"
+    },
+    {
+      "group": "301",
+      "end": "2024-08-06",
+      "featured": [
+        "navia",
+        "nilou"
+      ],
+      "start": "2024-07-17"
+    },
+    {
+      "group": "301",
+      "end": "2024-08-27",
+      "featured": [
+        "emilie",
+        "yelan"
+      ],
+      "start": "2024-08-06"
+    },
+    {
+      "group": "301",
+      "end": "2024-08-27",
+      "featured": [
+        "emilie",
+        "yelan"
+      ],
+      "start": "2024-08-06"
+    },
+    {
+      "group": "301",
+      "end": "2024-09-17",
+      "featured": [
+        "mualani",
+        "kaedeharakazuha"
+      ],
+      "start": "2024-08-28"
+    },
+    {
+      "group": "301",
+      "end": "2024-09-17",
+      "featured": [
+        "mualani",
+        "kaedeharakazuha"
+      ],
+      "start": "2024-08-28"
+    },
+    {
+      "group": "301",
+      "end": "2024-10-08",
+      "featured": [
+        "kinich",
+        "raidenshogun"
+      ],
+      "start": "2024-09-17"
+    },
+    {
+      "group": "301",
+      "end": "2024-10-08",
+      "featured": [
+        "kinich",
+        "raidenshogun"
+      ],
+      "start": "2024-09-17"
+    },
+    {
+      "group": "301",
+      "end": "2024-10-29",
+      "featured": [
+        "xilonen",
+        "chiori"
+      ],
+      "start": "2024-10-09"
+    },
+    {
+      "group": "301",
+      "end": "2024-10-29",
+      "featured": [
+        "xilonen",
+        "chiori"
+      ],
+      "start": "2024-10-09"
+    },
+    {
+      "group": "301",
+      "end": "2024-11-19",
+      "featured": [
+        "nahida",
+        "hutao"
+      ],
+      "start": "2024-10-29"
+    },
+    {
+      "group": "301",
+      "end": "2024-11-19",
+      "featured": [
+        "nahida",
+        "hutao"
+      ],
+      "start": "2024-10-29"
+    },
+    {
+      "group": "301",
+      "end": "2024-12-10",
+      "featured": [
+        "chasca",
+        "lyney"
+      ],
+      "start": "2024-11-20"
+    },
+    {
+      "group": "301",
+      "end": "2024-12-10",
+      "featured": [
+        "chasca",
+        "lyney"
+      ],
+      "start": "2024-11-20"
+    },
+    {
+      "group": "301",
+      "end": "2024-12-31",
+      "featured": [
+        "neuvillette",
+        "zhongli"
+      ],
+      "start": "2024-12-10"
+    },
+    {
+      "group": "301",
+      "end": "2024-12-31",
+      "featured": [
+        "neuvillette",
+        "zhongli"
+      ],
+      "start": "2024-12-10"
+    },
+    {
+      "group": "301",
+      "end": "2025-01-21",
+      "featured": [
+        "mavuika",
+        "citlali"
+      ],
+      "start": "2025-01-01"
+    },
+    {
+      "group": "301",
+      "end": "2025-01-21",
+      "featured": [
+        "mavuika",
+        "citlali"
+      ],
+      "start": "2025-01-01"
+    },
+    {
+      "group": "301",
+      "end": "2025-02-11",
+      "featured": [
+        "arlecchino",
+        "clorinde"
+      ],
+      "start": "2025-01-21"
+    },
+    {
+      "group": "301",
+      "end": "2025-02-11",
+      "featured": [
+        "arlecchino",
+        "clorinde"
+      ],
+      "start": "2025-01-21"
+    },
+    {
+      "group": "301",
+      "end": "2025-03-04",
+      "featured": [
+        "yumemizukimizuki",
+        "sigewinne"
+      ],
+      "start": "2025-02-12"
+    },
+    {
+      "group": "301",
+      "end": "2025-03-04",
+      "featured": [
+        "yumemizukimizuki",
+        "sigewinne"
+      ],
+      "start": "2025-02-12"
+    },
+    {
+      "group": "301",
+      "end": "2025-03-25",
+      "featured": [
+        "wriothesley",
+        "furina"
+      ],
+      "start": "2025-03-04"
+    },
+    {
+      "group": "301",
+      "end": "2025-03-25",
+      "featured": [
+        "wriothesley",
+        "furina"
+      ],
+      "start": "2025-03-04"
+    },
+    {
+      "group": "301",
+      "end": "2025-04-15",
+      "featured": [
+        "varesa",
+        "xianyun"
+      ],
+      "start": "2025-03-26"
+    },
+    {
+      "group": "301",
+      "end": "2025-04-15",
+      "featured": [
+        "varesa",
+        "xianyun"
+      ],
+      "start": "2025-03-26"
+    },
+    {
+      "group": "301",
+      "end": "2025-05-06",
+      "featured": [
+        "xilonen",
+        "venti"
+      ],
+      "start": "2025-04-15"
+    },
+    {
+      "group": "301",
+      "end": "2025-05-06",
+      "featured": [
+        "xilonen",
+        "venti"
+      ],
+      "start": "2025-04-15"
+    },
+    {
+      "group": "301",
+      "end": "2025-05-27",
+      "featured": [
+        "escoffier",
+        "navia"
+      ],
+      "start": "2025-05-07"
+    },
+    {
+      "group": "301",
+      "end": "2025-05-27",
+      "featured": [
+        "escoffier",
+        "navia"
+      ],
+      "start": "2025-05-07"
+    },
+    {
+      "group": "301",
+      "end": "2025-06-17",
+      "featured": [
+        "kinich",
+        "raidenshogun"
+      ],
+      "start": "2025-05-27"
+    },
+    {
+      "group": "301",
+      "end": "2025-06-17",
+      "featured": [
+        "kinich",
+        "raidenshogun"
+      ],
+      "start": "2025-05-27"
+    },
+    {
+      "group": "301",
+      "end": "2025-07-08",
+      "featured": [
+        "skirk",
+        "shenhe"
+      ],
+      "start": "2025-06-18"
+    },
+    {
+      "group": "301",
+      "end": "2025-07-08",
+      "featured": [
+        "skirk",
+        "shenhe"
+      ],
+      "start": "2025-06-18"
+    },
+    {
+      "group": "301",
+      "end": "2025-07-29",
+      "featured": [
+        "mavuika",
+        "emilie"
+      ],
+      "start": "2025-07-08"
+    },
+    {
+      "group": "301",
+      "end": "2025-07-29",
+      "featured": [
+        "mavuika",
+        "emilie"
+      ],
+      "start": "2025-07-08"
+    },
+    {
+      "group": "301",
+      "end": "2025-08-19",
+      "featured": [
+        "ineffa",
+        "citlali"
+      ],
+      "start": "2025-07-30"
+    },
+    {
+      "group": "301",
+      "end": "2025-08-19",
+      "featured": [
+        "ineffa",
+        "citlali"
+      ],
+      "start": "2025-07-30"
+    },
+    {
+      "group": "301",
+      "end": "2025-09-09",
+      "featured": [
+        "mualani",
+        "chasca"
+      ],
+      "start": "2025-08-19"
+    },
+    {
+      "group": "301",
+      "end": "2025-09-09",
+      "featured": [
+        "mualani",
+        "chasca"
+      ],
+      "start": "2025-08-19"
+    },
+    {
+      "group": "301",
+      "end": "2025-09-30",
+      "featured": [
+        "lauma",
+        "nahida"
+      ],
+      "start": "2025-09-10"
+    },
+    {
+      "group": "301",
+      "end": "2025-09-30",
+      "featured": [
+        "lauma",
+        "nahida"
+      ],
+      "start": "2025-09-10"
+    },
+    {
+      "group": "301",
+      "end": "2025-10-21",
+      "featured": [
+        "flins",
+        "yelan"
+      ],
+      "start": "2025-09-30"
+    },
+    {
+      "group": "301",
+      "end": "2025-10-21",
+      "featured": [
+        "flins",
+        "yelan"
+      ],
+      "start": "2025-09-30"
+    },
+    {
+      "group": "301",
+      "end": "2025-11-11",
+      "featured": [
+        "nefer",
+        "furina"
+      ],
+      "start": "2025-10-22"
+    },
+    {
+      "group": "301",
+      "end": "2025-11-11",
+      "featured": [
+        "nefer",
+        "furina"
+      ],
+      "start": "2025-10-22"
+    },
+    {
+      "group": "301",
+      "end": "2025-12-02",
+      "featured": [
+        "arlecchino",
+        "zhongli"
+      ],
+      "start": "2025-11-11"
+    },
+    {
+      "group": "301",
+      "end": "2025-12-02",
+      "featured": [
+        "arlecchino",
+        "zhongli"
+      ],
+      "start": "2025-11-11"
+    },
+    {
+      "group": "301",
+      "end": "2025-12-23",
+      "featured": [
+        "durin",
+        "venti"
+      ],
+      "start": "2025-12-03"
+    },
+    {
+      "group": "301",
+      "end": "2025-12-23",
+      "featured": [
+        "durin",
+        "venti"
+      ],
+      "start": "2025-12-03"
+    },
+    {
+      "group": "301",
+      "end": "2026-01-13",
+      "featured": [
+        "varesa",
+        "xilonen"
+      ],
+      "start": "2025-12-23"
+    },
+    {
+      "group": "301",
+      "end": "2026-01-13",
+      "featured": [
+        "varesa",
+        "xilonen"
+      ],
+      "start": "2025-12-23"
+    },
+    {
+      "group": "301",
+      "end": "2026-02-03",
+      "featured": [
+        "columbina",
+        "ineffa"
+      ],
+      "start": "2026-01-14"
+    },
+    {
+      "group": "301",
+      "end": "2026-02-03",
+      "featured": [
+        "columbina",
+        "ineffa"
+      ],
+      "start": "2026-01-14"
+    },
+    {
+      "group": "301",
+      "end": "2026-02-24",
+      "featured": [
+        "zibai",
+        "neuvillette"
+      ],
+      "start": "2026-02-03"
+    },
+    {
+      "group": "301",
+      "end": "2026-02-24",
+      "featured": [
+        "zibai",
+        "neuvillette"
+      ],
+      "start": "2026-02-03"
+    },
+    {
+      "group": "301",
+      "end": "2026-03-17",
+      "featured": [
+        "varka",
+        "flins"
+      ],
+      "start": "2026-02-25"
+    },
+    {
+      "group": "301",
+      "end": "2026-03-17",
+      "featured": [
+        "varka",
+        "flins"
+      ],
+      "start": "2026-02-25"
+    },
+    {
+      "group": "301",
+      "end": "2026-04-07",
+      "featured": [
+        "skirk",
+        "escoffier"
+      ],
+      "start": "2026-03-17"
+    },
+    {
+      "group": "301",
+      "end": "2026-04-07",
+      "featured": [
+        "skirk",
+        "escoffier"
+      ],
+      "start": "2026-03-17"
+    },
+    {
+      "group": "301",
+      "end": "2026-04-28",
+      "featured": [
+        "linnea",
+        "chasca"
+      ],
+      "start": "2026-04-08"
+    },
+    {
+      "group": "301",
+      "end": "2026-04-28",
+      "featured": [
+        "linnea",
+        "chasca"
+      ],
+      "start": "2026-04-08"
+    },
+    {
+      "group": "301",
+      "end": "2026-05-19",
+      "featured": [
+        "lauma",
+        "nefer"
+      ],
+      "start": "2026-04-28"
+    },
+    {
+      "group": "301",
+      "end": "2026-05-19",
+      "featured": [
+        "lauma",
+        "nefer"
+      ],
+      "start": "2026-04-28"
+    },
+    {
+      "group": "301",
+      "end": "2026-06-09",
+      "featured": [
+        "nicole",
+        "durin"
+      ],
+      "start": "2026-05-20"
+    },
+    {
+      "group": "301",
+      "end": "2026-06-09",
+      "featured": [
+        "nicole",
+        "durin"
+      ],
+      "start": "2026-05-20"
+    },
+    {
+      "group": "301",
+      "end": "2026-06-30",
+      "featured": [
+        "lohen",
+        "mavuika"
+      ],
+      "start": "2026-06-09"
+    },
+    {
+      "group": "301",
+      "end": "2026-06-30",
+      "featured": [
+        "lohen",
+        "mavuika"
+      ],
+      "start": "2026-06-09"
+    },
+    {
+      "group": "301",
+      "end": "2026-07-21",
+      "featured": [
+        "sandrone",
+        "citlali"
+      ],
+      "start": "2026-07-01"
+    },
+    {
+      "group": "301",
+      "end": "2026-07-21",
+      "featured": [
+        "sandrone",
+        "citlali"
+      ],
+      "start": "2026-07-01"
+    },
+    {
+      "group": "301",
+      "end": "2026-08-11",
+      "featured": [
+        "columbina",
+        "raidenshogun"
+      ],
+      "start": "2026-07-21"
+    },
+    {
+      "group": "301",
+      "end": "2026-08-11",
+      "featured": [
+        "columbina",
+        "raidenshogun"
+      ],
+      "start": "2026-07-21"
+    },
+    {
+      "group": "301",
+      "end": "2026-09-01",
+      "featured": [
+        "odette",
+        "arlecchino"
+      ],
+      "start": "2026-08-12"
+    },
+    {
+      "group": "301",
+      "end": "2026-09-01",
+      "featured": [
+        "odette",
+        "arlecchino"
+      ],
+      "start": "2026-08-12"
+    },
+    {
+      "group": "301",
+      "end": "2026-09-22",
+      "featured": [
+        "flins",
+        "ineffa"
+      ],
+      "start": "2026-09-01"
+    },
+    {
+      "group": "301",
+      "end": "2026-09-22",
+      "featured": [
+        "flins",
+        "ineffa"
+      ],
+      "start": "2026-09-01"
+    },
+    {
+      "group": "302",
+      "end": "2020-10-18",
+      "featured": [
+        "aquilafavonia",
+        "amosbow"
+      ],
+      "start": "2020-09-28"
+    },
+    {
+      "group": "302",
+      "end": "2020-11-10",
+      "featured": [
+        "lostprayertothesacredwinds",
+        "wolfsgravestone"
+      ],
+      "start": "2020-10-20"
+    },
+    {
+      "group": "302",
+      "end": "2020-12-01",
+      "featured": [
+        "skywardharp",
+        "memoryofdust"
+      ],
+      "start": "2020-11-11"
+    },
+    {
+      "group": "302",
+      "end": "2020-12-22",
+      "featured": [
+        "vortexvanquisher",
+        "theunforged"
+      ],
+      "start": "2020-12-01"
+    },
+    {
+      "group": "302",
+      "end": "2021-01-12",
+      "featured": [
+        "summitshaper",
+        "skywardatlas"
+      ],
+      "start": "2020-12-23"
+    },
+    {
+      "group": "302",
+      "end": "2021-02-02",
+      "featured": [
+        "amosbow",
+        "skywardpride"
+      ],
+      "start": "2021-01-12"
+    },
+    {
+      "group": "302",
+      "end": "2021-02-23",
+      "featured": [
+        "primordialjadewingedspear",
+        "primordialjadecutter"
+      ],
+      "start": "2021-02-03"
+    },
+    {
+      "group": "302",
+      "end": "2021-03-16",
+      "featured": [
+        "wolfsgravestone",
+        "staffofhoma"
+      ],
+      "start": "2021-02-23"
+    },
+    {
+      "group": "302",
+      "end": "2021-04-06",
+      "featured": [
+        "elegyfortheend",
+        "skywardblade"
+      ],
+      "start": "2021-03-17"
+    },
+    {
+      "group": "302",
+      "end": "2021-04-27",
+      "featured": [
+        "skywardharp",
+        "lostprayertothesacredwinds"
+      ],
+      "start": "2021-04-06"
+    },
+    {
+      "group": "302",
+      "end": "2021-05-18",
+      "featured": [
+        "summitshaper",
+        "memoryofdust"
+      ],
+      "start": "2021-04-28"
+    },
+    {
+      "group": "302",
+      "end": "2021-06-08",
+      "featured": [
+        "songofbrokenpines",
+        "aquilafavonia"
+      ],
+      "start": "2021-05-18"
+    },
+    {
+      "group": "302",
+      "end": "2021-06-29",
+      "featured": [
+        "lostprayertothesacredwinds",
+        "skywardpride"
+      ],
+      "start": "2021-06-09"
+    },
+    {
+      "group": "302",
+      "end": "2021-07-20",
+      "featured": [
+        "freedomsworn",
+        "skywardatlas"
+      ],
+      "start": "2021-06-29"
+    },
+    {
+      "group": "302",
+      "end": "2021-08-10",
+      "featured": [
+        "mistsplitterreforged",
+        "skywardspine"
+      ],
+      "start": "2021-07-21"
+    },
+    {
+      "group": "302",
+      "end": "2021-08-31",
+      "featured": [
+        "thunderingpulse",
+        "skywardblade"
+      ],
+      "start": "2021-08-10"
+    },
+    {
+      "group": "302",
+      "end": "2021-09-21",
+      "featured": [
+        "engulfinglightning",
+        "theunforged"
+      ],
+      "start": "2021-09-01"
+    },
+    {
+      "group": "302",
+      "end": "2021-10-12",
+      "featured": [
+        "primordialjadecutter",
+        "everlastingmoonglow"
+      ],
+      "start": "2021-09-21"
+    },
+    {
+      "group": "302",
+      "end": "2021-11-02",
+      "featured": [
+        "polarstar",
+        "memoryofdust"
+      ],
+      "start": "2021-10-13"
+    },
+    {
+      "group": "302",
+      "end": "2021-11-23",
+      "featured": [
+        "staffofhoma",
+        "elegyfortheend"
+      ],
+      "start": "2021-11-02"
+    },
+    {
+      "group": "302",
+      "end": "2021-12-14",
+      "featured": [
+        "freedomsworn",
+        "songofbrokenpines"
+      ],
+      "start": "2021-11-24"
+    },
+    {
+      "group": "302",
+      "end": "2022-01-04",
+      "featured": [
+        "redhornstonethresher",
+        "skywardharp"
+      ],
+      "start": "2021-12-14"
+    },
+    {
+      "group": "302",
+      "end": "2022-01-25",
+      "featured": [
+        "calamityqueller",
+        "primordialjadewingedspear"
+      ],
+      "start": "2022-01-05"
+    },
+    {
+      "group": "302",
+      "end": "2022-02-15",
+      "featured": [
+        "amosbow",
+        "vortexvanquisher"
+      ],
+      "start": "2022-01-25"
+    },
+    {
+      "group": "302",
+      "end": "2022-03-08",
+      "featured": [
+        "kagurasverity",
+        "primordialjadecutter"
+      ],
+      "start": "2022-02-16"
+    },
+    {
+      "group": "302",
+      "end": "2022-03-29",
+      "featured": [
+        "engulfinglightning",
+        "everlastingmoonglow"
+      ],
+      "start": "2022-03-08"
+    },
+    {
+      "group": "302",
+      "end": "2022-04-19",
+      "featured": [
+        "harangeppakufutsu",
+        "elegyfortheend"
+      ],
+      "start": "2022-03-30"
+    },
+    {
+      "group": "302",
+      "end": "2022-05-31",
+      "featured": [
+        "mistsplitterreforged",
+        "theunforged"
+      ],
+      "start": "2022-04-19"
+    },
+    {
+      "group": "302",
+      "end": "2022-06-21",
+      "featured": [
+        "aquasimulacra",
+        "primordialjadewingedspear"
+      ],
+      "start": "2022-05-31"
+    },
+    {
+      "group": "302",
+      "end": "2022-07-12",
+      "featured": [
+        "redhornstonethresher",
+        "memoryofdust"
+      ],
+      "start": "2022-06-21"
+    },
+    {
+      "group": "302",
+      "end": "2022-08-02",
+      "featured": [
+        "freedomsworn",
+        "lostprayertothesacredwinds"
+      ],
+      "start": "2022-07-13"
+    },
+    {
+      "group": "302",
+      "end": "2022-08-23",
+      "featured": [
+        "thunderingpulse",
+        "summitshaper"
+      ],
+      "start": "2022-08-02"
+    },
+    {
+      "group": "302",
+      "end": "2022-09-09",
+      "featured": [
+        "hunterspath",
+        "vortexvanquisher"
+      ],
+      "start": "2022-08-24"
+    },
+    {
+      "group": "302",
+      "end": "2022-09-27",
+      "featured": [
+        "amosbow",
+        "everlastingmoonglow"
+      ],
+      "start": "2022-09-09"
+    },
+    {
+      "group": "302",
+      "end": "2022-10-14",
+      "featured": [
+        "staffofthescarletsands",
+        "elegyfortheend"
+      ],
+      "start": "2022-09-28"
+    },
+    {
+      "group": "302",
+      "end": "2022-11-01",
+      "featured": [
+        "keyofkhajnisut",
+        "primordialjadecutter"
+      ],
+      "start": "2022-10-14"
+    },
+    {
+      "group": "302",
+      "end": "2022-11-18",
+      "featured": [
+        "athousandfloatingdreams",
+        "thunderingpulse"
+      ],
+      "start": "2022-11-02"
+    },
+    {
+      "group": "302",
+      "end": "2022-12-06",
+      "featured": [
+        "kagurasverity",
+        "polarstar"
+      ],
+      "start": "2022-11-18"
+    },
+    {
+      "group": "302",
+      "end": "2022-12-27",
+      "featured": [
+        "tulaytullahsremembrance",
+        "redhornstonethresher"
+      ],
+      "start": "2022-12-07"
+    },
+    {
+      "group": "302",
+      "end": "2023-01-17",
+      "featured": [
+        "engulfinglightning",
+        "harangeppakufutsu"
+      ],
+      "start": "2022-12-27"
+    },
+    {
+      "group": "302",
+      "end": "2023-02-07",
+      "featured": [
+        "lightoffoliarincision",
+        "primordialjadewingedspear"
+      ],
+      "start": "2023-01-18"
+    },
+    {
+      "group": "302",
+      "end": "2023-02-28",
+      "featured": [
+        "staffofhoma",
+        "aquasimulacra"
+      ],
+      "start": "2023-02-07"
+    },
+    {
+      "group": "302",
+      "end": "2023-03-21",
+      "featured": [
+        "beaconofthereedsea",
+        "staffofthescarletsands"
+      ],
+      "start": "2023-03-01"
+    },
+    {
+      "group": "302",
+      "end": "2023-04-11",
+      "featured": [
+        "calamityqueller",
+        "mistsplitterreforged"
+      ],
+      "start": "2023-03-21"
+    },
+    {
+      "group": "302",
+      "end": "2023-05-02",
+      "featured": [
+        "keyofkhajnisut",
+        "athousandfloatingdreams"
+      ],
+      "start": "2023-04-12"
+    },
+    {
+      "group": "302",
+      "end": "2023-05-23",
+      "featured": [
+        "jadefallssplendor",
+        "amosbow"
+      ],
+      "start": "2023-05-02"
+    },
+    {
+      "group": "302",
+      "end": "2023-06-13",
+      "featured": [
+        "thunderingpulse",
+        "kagurasverity"
+      ],
+      "start": "2023-05-24"
+    },
+    {
+      "group": "302",
+      "end": "2023-07-04",
+      "featured": [
+        "freedomsworn",
+        "lightoffoliarincision"
+      ],
+      "start": "2023-06-13"
+    },
+    {
+      "group": "302",
+      "end": "2023-07-25",
+      "featured": [
+        "songofbrokenpines",
+        "lostprayertothesacredwinds"
+      ],
+      "start": "2023-07-05"
+    },
+    {
+      "group": "302",
+      "end": "2023-08-15",
+      "featured": [
+        "everlastingmoonglow",
+        "tulaytullahsremembrance"
+      ],
+      "start": "2023-07-25"
+    },
+    {
+      "group": "302",
+      "end": "2023-09-05",
+      "featured": [
+        "thefirstgreatmagic",
+        "aquasimulacra"
+      ],
+      "start": "2023-08-16"
+    },
+    {
+      "group": "302",
+      "end": "2023-09-26",
+      "featured": [
+        "polarstar",
+        "vortexvanquisher"
+      ],
+      "start": "2023-09-05"
+    },
+    {
+      "group": "302",
+      "end": "2023-10-17",
+      "featured": [
+        "tomeoftheeternalflow",
+        "staffofhoma"
+      ],
+      "start": "2023-09-27"
+    },
+    {
+      "group": "302",
+      "end": "2023-11-07",
+      "featured": [
+        "cashflowsupervision",
+        "elegyfortheend"
+      ],
+      "start": "2023-10-17"
+    },
+    {
+      "group": "302",
+      "end": "2023-11-28",
+      "featured": [
+        "splendoroftranquilwaters",
+        "jadefallssplendor"
+      ],
+      "start": "2023-11-08"
+    },
+    {
+      "group": "302",
+      "end": "2023-12-19",
+      "featured": [
+        "staffofthescarletsands",
+        "harangeppakufutsu"
+      ],
+      "start": "2023-11-28"
+    },
+    {
+      "group": "302",
+      "end": "2024-01-09",
+      "featured": [
+        "verdict",
+        "mistsplitterreforged"
+      ],
+      "start": "2023-12-20"
+    },
+    {
+      "group": "302",
+      "end": "2024-01-30",
+      "featured": [
+        "engulfinglightning",
+        "thunderingpulse"
+      ],
+      "start": "2024-01-09"
+    },
+    {
+      "group": "302",
+      "end": "2024-02-20",
+      "featured": [
+        "cranesechoingcall",
+        "athousandfloatingdreams"
+      ],
+      "start": "2024-01-31"
+    },
+    {
+      "group": "302",
+      "end": "2024-03-12",
+      "featured": [
+        "primordialjadewingedspear",
+        "kagurasverity"
+      ],
+      "start": "2024-02-20"
+    },
+    {
+      "group": "302",
+      "end": "2024-04-02",
+      "featured": [
+        "urakumisugiri",
+        "redhornstonethresher"
+      ],
+      "start": "2024-03-13"
+    },
+    {
+      "group": "302",
+      "end": "2024-04-23",
+      "featured": [
+        "tomeoftheeternalflow",
+        "freedomsworn"
+      ],
+      "start": "2024-04-02"
+    },
+    {
+      "group": "302",
+      "end": "2024-05-14",
+      "featured": [
+        "crimsonmoonssemblance",
+        "thefirstgreatmagic"
+      ],
+      "start": "2024-04-24"
+    },
+    {
+      "group": "302",
+      "end": "2024-06-04",
+      "featured": [
+        "tulaytullahsremembrance",
+        "jadefallssplendor"
+      ],
+      "start": "2024-05-14"
+    },
+    {
+      "group": "302",
+      "end": "2024-06-25",
+      "featured": [
+        "absolution",
+        "lightoffoliarincision"
+      ],
+      "start": "2024-06-05"
+    },
+    {
+      "group": "302",
+      "end": "2024-07-16",
+      "featured": [
+        "silvershowerheartstrings",
+        "splendoroftranquilwaters"
+      ],
+      "start": "2024-06-25"
+    },
+    {
+      "group": "302",
+      "end": "2024-08-06",
+      "featured": [
+        "verdict",
+        "keyofkhajnisut"
+      ],
+      "start": "2024-07-17"
+    },
+    {
+      "group": "302",
+      "end": "2024-08-27",
+      "featured": [
+        "lumidouceelegy",
+        "aquasimulacra"
+      ],
+      "start": "2024-08-06"
+    },
+    {
+      "group": "302",
+      "end": "2024-09-17",
+      "featured": [
+        "surfsup",
+        "freedomsworn"
+      ],
+      "start": "2024-08-28"
+    },
+    {
+      "group": "302",
+      "end": "2024-10-08",
+      "featured": [
+        "fangofthemountainking",
+        "engulfinglightning"
+      ],
+      "start": "2024-09-17"
+    },
+    {
+      "group": "302",
+      "end": "2024-10-29",
+      "featured": [
+        "peakpatrolsong",
+        "urakumisugiri"
+      ],
+      "start": "2024-10-09"
+    },
+    {
+      "group": "302",
+      "end": "2024-11-19",
+      "featured": [
+        "athousandfloatingdreams",
+        "staffofhoma"
+      ],
+      "start": "2024-10-29"
+    },
+    {
+      "group": "302",
+      "end": "2024-12-10",
+      "featured": [
+        "astralvulturescrimsonplumage",
+        "thefirstgreatmagic"
+      ],
+      "start": "2024-11-20"
+    },
+    {
+      "group": "302",
+      "end": "2024-12-31",
+      "featured": [
+        "tomeoftheeternalflow",
+        "vortexvanquisher"
+      ],
+      "start": "2024-12-10"
+    },
+    {
+      "group": "302",
+      "end": "2025-01-21",
+      "featured": [
+        "athousandblazingsuns",
+        "starcallerswatch"
+      ],
+      "start": "2025-01-01"
+    },
+    {
+      "group": "302",
+      "end": "2025-02-11",
+      "featured": [
+        "crimsonmoonssemblance",
+        "absolution"
+      ],
+      "start": "2025-01-21"
+    },
+    {
+      "group": "302",
+      "end": "2025-03-04",
+      "featured": [
+        "sunnymorningsleepin",
+        "silvershowerheartstrings"
+      ],
+      "start": "2025-02-12"
+    },
+    {
+      "group": "302",
+      "end": "2025-03-25",
+      "featured": [
+        "splendoroftranquilwaters",
+        "cashflowsupervision"
+      ],
+      "start": "2025-03-04"
+    },
+    {
+      "group": "302",
+      "end": "2025-04-15",
+      "featured": [
+        "vividnotions",
+        "cranesechoingcall"
+      ],
+      "start": "2025-03-26"
+    },
+    {
+      "group": "302",
+      "end": "2025-05-06",
+      "featured": [
+        "peakpatrolsong",
+        "elegyfortheend"
+      ],
+      "start": "2025-04-15"
+    },
+    {
+      "group": "302",
+      "end": "2025-05-27",
+      "featured": [
+        "symphonistofscents",
+        "verdict"
+      ],
+      "start": "2025-05-07"
+    },
+    {
+      "group": "302",
+      "end": "2025-06-17",
+      "featured": [
+        "fangofthemountainking",
+        "engulfinglightning"
+      ],
+      "start": "2025-05-27"
+    },
+    {
+      "group": "302",
+      "end": "2025-07-08",
+      "featured": [
+        "azurelight",
+        "calamityqueller"
+      ],
+      "start": "2025-06-18"
+    },
+    {
+      "group": "302",
+      "end": "2025-07-29",
+      "featured": [
+        "athousandblazingsuns",
+        "calamityqueller"
+      ],
+      "start": "2025-07-08"
+    },
+    {
+      "group": "302",
+      "end": "2025-08-19",
+      "featured": [
+        "fracturedhalo",
+        "starcallerswatch"
+      ],
+      "start": "2025-07-30"
+    },
+    {
+      "group": "302",
+      "end": "2025-09-09",
+      "featured": [
+        "surfsup",
+        "astralvulturescrimsonplumage"
+      ],
+      "start": "2025-08-19"
+    },
+    {
+      "group": "302",
+      "end": "2025-09-30",
+      "featured": [
+        "nightweaverslookingglass",
+        "athousandfloatingdreams"
+      ],
+      "start": "2025-09-10"
+    },
+    {
+      "group": "302",
+      "end": "2025-10-21",
+      "featured": [
+        "bloodsoakedruins",
+        "aquasimulacra"
+      ],
+      "start": "2025-09-30"
+    },
+    {
+      "group": "302",
+      "end": "2025-11-11",
+      "featured": [
+        "reliquaryoftruth",
+        "splendoroftranquilwaters"
+      ],
+      "start": "2025-10-22"
+    },
+    {
+      "group": "302",
+      "end": "2025-12-02",
+      "featured": [
+        "crimsonmoonssemblance",
+        "vortexvanquisher"
+      ],
+      "start": "2025-11-11"
+    },
+    {
+      "group": "302",
+      "end": "2025-12-23",
+      "featured": [
+        "athameartis",
+        "thedaybreakchronicles"
+      ],
+      "start": "2025-12-03"
+    },
+    {
+      "group": "302",
+      "end": "2026-01-13",
+      "featured": [
+        "vividnotions",
+        "peakpatrolsong"
+      ],
+      "start": "2025-12-23"
+    },
+    {
+      "group": "302",
+      "end": "2026-02-03",
+      "featured": [
+        "nocturnescurtaincall",
+        "fracturedhalo"
+      ],
+      "start": "2026-01-14"
+    },
+    {
+      "group": "302",
+      "end": "2026-02-24",
+      "featured": [
+        "lightbearingmoonshard",
+        "tomeoftheeternalflow"
+      ],
+      "start": "2026-02-03"
+    },
+    {
+      "group": "302",
+      "end": "2026-03-17",
+      "featured": [
+        "gestofthemightywolf",
+        "bloodsoakedruins"
+      ],
+      "start": "2026-02-25"
+    },
+    {
+      "group": "302",
+      "end": "2026-04-07",
+      "featured": [
+        "azurelight",
+        "symphonistofscents"
+      ],
+      "start": "2026-03-17"
+    },
+    {
+      "group": "302",
+      "end": "2026-04-28",
+      "featured": [
+        "goldenfrostboundoath",
+        "astralvulturescrimsonplumage"
+      ],
+      "start": "2026-04-08"
+    },
+    {
+      "group": "302",
+      "end": "2026-05-19",
+      "featured": [
+        "nightweaverslookingglass",
+        "reliquaryoftruth"
+      ],
+      "start": "2026-04-28"
+    },
+    {
+      "group": "302",
+      "end": "2026-06-09",
+      "featured": [
+        "angelosheptades",
+        "athameartis"
+      ],
+      "start": "2026-05-20"
+    },
+    {
+      "group": "302",
+      "end": "2026-06-30",
+      "featured": [
+        "disasterandremorse",
+        "athousandblazingsuns"
+      ],
+      "start": "2026-06-09"
+    },
+    {
+      "group": "302",
+      "end": "2026-07-21",
+      "featured": [
+        "ateaspoonoftranscendence",
+        "starcallerswatch"
+      ],
+      "start": "2026-07-01"
+    },
+    {
+      "group": "302",
+      "end": "2026-08-11",
+      "featured": [
+        "nocturnescurtaincall",
+        "engulfinglightning"
+      ],
+      "start": "2026-07-21"
+    },
+    {
+      "group": "302",
+      "end": "2026-09-01",
+      "featured": [
+        "whitelakefrostfeather",
+        "crimsonmoonssemblance"
+      ],
+      "start": "2026-08-12"
+    },
+    {
+      "group": "302",
+      "end": "2026-09-22",
+      "featured": [
+        "bloodsoakedruins",
+        "fracturedhalo"
+      ],
+      "start": "2026-09-01"
+    }
+  ],
+  "source": "https://github.com/MadeBaruna/paimon-moe/blob/main/src/data/banners.js",
+  "retrieved_at": "2026-09-22"
+}

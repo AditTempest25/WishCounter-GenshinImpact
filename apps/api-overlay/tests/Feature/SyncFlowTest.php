@@ -39,6 +39,7 @@ class SyncFlowTest extends TestCase
         $this->getJson('/api/accounts/800000001/stats')->assertOk()
             ->assertJsonPath('total_wishes', 2)
             ->assertJsonPath('banners.301.current_pity', 1)
+            ->assertJsonPath('banners.301.last_5_star.item_id', '1')
             ->assertJsonPath('banners.301.last_5_star.name', 'Test five star');
     }
 
@@ -48,6 +49,48 @@ class SyncFlowTest extends TestCase
         $this->postJson("/api/sync-sessions/$token/wishes", ['source' => 'windows-companion', 'wishes' => []])
             ->assertOk()->assertJsonPath('status', 'completed')->assertJsonPath('new_wishes', 0);
         $this->assertDatabaseCount('genshin_accounts', 0);
+    }
+
+    public function test_dashboard_cards_reflect_imports_and_latest_successful_sync(): void
+    {
+        $this->travelTo(now()->startOfSecond());
+        $records = [];
+        foreach (['200', '301', '302', '500'] as $index => $type) {
+            $records[] = [
+                'id' => (string) (1000 + $index), 'gacha_type' => $type,
+                'uigf_gacha_type' => $type, 'name' => "Five star $type",
+                'item_type' => $type === '302' ? 'Weapon' : 'Character',
+                'rank_type' => '5', 'time' => '2026-09-21 10:00:00',
+            ];
+        }
+        $payload = ['source' => 'windows-companion', 'uid' => '800000002', 'wishes' => $records];
+        $token = $this->postJson('/api/sync-sessions')->json('token');
+        $this->postJson("/api/sync-sessions/$token/wishes", $payload)->assertOk();
+        $firstSync = now()->toIso8601String();
+        $response = $this->getJson('/api/accounts/800000002/stats')->assertOk()
+            ->assertJsonPath('total_wishes', 4)
+            ->assertJsonPath('last_synced_at', $firstSync);
+        foreach (['200', '301', '302', '500'] as $type) {
+            $response->assertJsonPath("banners.$type.total_wishes", 1)
+                ->assertJsonPath("banners.$type.current_pity", 0)
+                ->assertJsonPath("banners.$type.last_5_star.name", "Five star $type");
+        }
+
+        $this->travel(1)->minutes();
+        $token = $this->postJson('/api/sync-sessions')->json('token');
+        $this->postJson("/api/sync-sessions/$token/wishes", $payload)
+            ->assertOk()->assertJsonPath('new_wishes', 0);
+        $lastSync = now()->toIso8601String();
+        $this->travel(1)->minutes();
+        // Waiting/failed sessions and another account must not change this account's timestamp.
+        $token = $this->postJson('/api/sync-sessions')->json('token');
+        SyncSession::where('token_hash', hash('sha256', $token))->update([
+            'uid' => '800000002', 'status' => 'failed', 'completed_at' => now(),
+        ]);
+        $other = $this->postJson('/api/sync-sessions')->json('token');
+        $this->postJson("/api/sync-sessions/$other/wishes", array_replace($payload, ['uid' => '800000003']))->assertOk();
+        $this->getJson('/api/accounts/800000002/stats')->assertOk()
+            ->assertJsonPath('total_wishes', 4)->assertJsonPath('last_synced_at', $lastSync);
     }
 
     public function test_expired_and_unknown_tokens_cannot_upload(): void
