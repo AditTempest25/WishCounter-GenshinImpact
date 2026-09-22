@@ -1,0 +1,31 @@
+# Dependencies and generated output (keep locally; do not publish)
+node_modules/
+vendor/
+.next/
+dist/
+bin/
+obj/
+*.tsbuildinfo
+
+# Local credentials and wish data
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.log
+
+# Laravel runtime generated from apps/api-overlay by setup-windows.ps1
+apps/api/
+
+# Original distribution copies; active sources live at the repository root
+/IrminsulWish-POC-*/
+/IrminsulWish-POC-*.zip
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.user
+*.suo
