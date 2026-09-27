@@ -14,6 +14,7 @@ class SyncSession extends Model
         'message',
         'expires_at',
         'completed_at',
+        'summary',
     ];
 
     protected function casts(): array
@@ -21,6 +22,7 @@ class SyncSession extends Model
         return [
             'expires_at' => 'datetime',
             'completed_at' => 'datetime',
+            'summary' => 'array',
         ];
     }
 }

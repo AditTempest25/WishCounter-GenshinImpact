@@ -31,10 +31,14 @@ class SyncFlowTest extends TestCase
         $this->postJson("/api/sync-sessions/$token/wishes", $payload)
             ->assertOk()->assertJsonPath('new_wishes', 2);
         $this->getJson("/api/sync-sessions/$token")
-            ->assertOk()->assertJsonPath('status', 'completed')->assertJsonPath('uid', '800000001');
+            ->assertOk()->assertJsonPath('status', 'completed')->assertJsonPath('uid', '800000001')
+            ->assertJsonPath('summary.new_wishes', 2)->assertJsonPath('summary.five_stars', 1)
+            ->assertJsonPath('summary.four_stars', 0)->assertJsonPath('summary.three_stars', 1);
         $second = $this->postJson('/api/sync-sessions')->json('token');
         $this->postJson("/api/sync-sessions/$second/wishes", $payload)
             ->assertOk()->assertJsonPath('new_wishes', 0);
+        $this->getJson("/api/sync-sessions/$second")->assertOk()
+            ->assertJsonPath('summary.new_wishes', 0)->assertJsonPath('summary.five_stars', 0);
         $this->assertDatabaseCount('wishes', 2);
         $this->getJson('/api/accounts/800000001/stats')->assertOk()
             ->assertJsonPath('total_wishes', 2)

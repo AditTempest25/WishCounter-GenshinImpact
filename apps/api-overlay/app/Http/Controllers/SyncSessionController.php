@@ -48,6 +48,7 @@ class SyncSessionController extends Controller
             'new_wishes' => $session->new_wishes,
             'uid' => $session->uid,
             'message' => $session->message,
+            'summary' => $session->summary,
         ]);
     }
 
@@ -78,9 +79,10 @@ class SyncSessionController extends Controller
             return response()->json(['message' => 'UID is required when wish records are present.'], 422);
         }
 
-        [$account, $newCount] = DB::transaction(function () use ($payload) {
+        [$account, $newCount, $summary] = DB::transaction(function () use ($payload) {
             $account = null;
             $newCount = 0;
+            $summary = ['new_wishes' => 0, 'five_stars' => 0, 'four_stars' => 0, 'three_stars' => 0];
 
             if (! empty($payload['uid'])) {
                 $account = GenshinAccount::firstOrCreate(
@@ -109,11 +111,16 @@ class SyncSessionController extends Controller
                         ]
                     );
 
-                    if ($wish->wasRecentlyCreated) $newCount++;
+                    if ($wish->wasRecentlyCreated) {
+                        $newCount++;
+                        $key = [3 => 'three_stars', 4 => 'four_stars', 5 => 'five_stars'][(int) $wish->rank_type] ?? null;
+                        if ($key) $summary[$key]++;
+                    }
                 }
             }
 
-            return [$account, $newCount];
+            $summary['new_wishes'] = $newCount;
+            return [$account, $newCount, $summary];
         });
 
         $session->update([
@@ -122,6 +129,7 @@ class SyncSessionController extends Controller
             'new_wishes' => $newCount,
             'message' => $newCount > 0 ? "Imported {$newCount} new wishes." : 'No new wishes were found.',
             'completed_at' => now(),
+            'summary' => $summary,
         ]);
 
         return response()->json([
