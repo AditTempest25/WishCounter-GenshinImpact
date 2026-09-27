@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: irminsul-wish-api
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./deploy/api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: "80"
+      - key: APP_NAME
+        value: IrminsulWish
+      - key: APP_KEY
+        sync: false
+      - key: DB_URL
+        sync: false
+      - key: APP_URL
+        sync: false

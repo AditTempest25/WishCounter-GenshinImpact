@@ -29,3 +29,6 @@ apps/api/
 Thumbs.db
 *.user
 *.suo
+.vercel/
+# Generated companion download; rebuild with scripts/package-companion.ps1.
+apps/web/public/downloads/*.zip

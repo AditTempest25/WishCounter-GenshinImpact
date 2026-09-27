@@ -1,4 +1,4 @@
-export const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000/api";
+export const API_BASE = "/api/backend";
 
 export type SyncSession = {
   token: string;
@@ -12,10 +12,10 @@ export type SyncSession = {
 };
 
 export async function createSyncSession(): Promise<SyncSession> {
-  const response = await fetch(`${API_BASE}/sync-sessions`, {
+  const response = await apiFetch(`${API_BASE}/sync-sessions`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    signal: AbortSignal.timeout(15000),
+    signal: AbortSignal.timeout(115000),
   });
 
   if (!response.ok) throw new Error(`API error ${response.status}`);
@@ -23,9 +23,9 @@ export async function createSyncSession(): Promise<SyncSession> {
 }
 
 export async function getSyncSession(token: string): Promise<SyncSession> {
-  const response = await fetch(`${API_BASE}/sync-sessions/${encodeURIComponent(token)}`, {
+  const response = await apiFetch(`${API_BASE}/sync-sessions/${encodeURIComponent(token)}`, {
     cache: "no-store",
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(115000),
   });
 
   if (!response.ok) throw new Error(`API error ${response.status}`);
@@ -44,16 +44,16 @@ export type AccountStats = {
   region: string | null;
   last_synced_at: string | null;
   last_sync_summary?: SyncSummary | null;
-  analytics?: { overall: WishMetrics; banners: Record<string, WishMetrics> };
+  analytics?: { overall: WishMetrics; banners: Record<string, WishMetrics>; months?: Record<string, Record<string, number>>; journey?: { id: string; banner: string; name: string; time: string; pulls: number; complete: boolean }[] };
   next_guarantee?: Record<string, "guaranteed" | "not_guaranteed" | "unknown">;
   total_wishes: number;
   banners: Record<string, BannerStats>;
 };
 
 export async function getAccountStats(uid: string): Promise<AccountStats> {
-  const response = await fetch(`${API_BASE}/accounts/${encodeURIComponent(uid)}/stats`, {
+  const response = await apiFetch(`${API_BASE}/accounts/${encodeURIComponent(uid)}/stats`, {
     cache: "no-store",
-    signal: AbortSignal.timeout(15000),
+    signal: AbortSignal.timeout(115000),
   });
   if (!response.ok) throw new Error(`API error ${response.status}`);
   return response.json();
@@ -84,9 +84,9 @@ export async function getWishHistory(uid: string, page: number, banner: string, 
   const query = new URLSearchParams({ page: String(page) });
   if (banner !== "all") query.set("banner", banner);
   if (rarity !== "all") query.set("rarity", rarity);
-  const response = await fetch(`${API_BASE}/accounts/${encodeURIComponent(uid)}/wishes?${query}`, {
+  const response = await apiFetch(`${API_BASE}/accounts/${encodeURIComponent(uid)}/wishes?${query}`, {
     cache: "no-store",
-    signal: AbortSignal.any([signal, AbortSignal.timeout(15000)]),
+    signal: AbortSignal.any([signal, AbortSignal.timeout(115000)]),
   });
   if (!response.ok) throw new Error(`Gagal memuat history (API ${response.status}).`);
   return response.json();
@@ -117,10 +117,16 @@ export async function loadWishPage(uid: string, page: number, filters: HistoryFi
   for (const [key, value] of Object.entries(filters)) {
     if (value !== undefined && value !== "" && value !== "all") query.set(key, String(value));
   }
-  const response = await fetch(`${API_BASE}/accounts/${encodeURIComponent(uid)}/wishes?${query}`, {
+  const response = await apiFetch(`${API_BASE}/accounts/${encodeURIComponent(uid)}/wishes?${query}`, {
     cache: "no-store",
-    signal: AbortSignal.any([signal, AbortSignal.timeout(15000)]),
+    signal: AbortSignal.any([signal, AbortSignal.timeout(115000)]),
   });
   if (!response.ok) throw new Error(response.status === 422 ? "Filter tidak valid. Periksa rentang tanggal dan pilihan filter." : `History gagal dimuat (API ${response.status}).`);
   return response.json();
+}
+
+export async function apiFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+  const response = await fetch(input, init);
+  if (response.status === 401 && typeof window !== "undefined") window.dispatchEvent(new Event("irminsul:unauthorized"));
+  return response;
 }

@@ -26,7 +26,7 @@ class WishHistoryController extends Controller
         if (isset($filters['from'], $filters['to']) && $filters['to'] < $filters['from']) {
             throw \Illuminate\Validation\ValidationException::withMessages(['to' => 'Tanggal akhir harus setelah tanggal awal.']);
         }
-        $account = GenshinAccount::where('uid', $uid)->firstOrFail();
+        $account = GenshinAccount::where('user_id', auth()->id())->where('uid', $uid)->firstOrFail();
         $rateHistory = $rateUp->forAccount($account)['history'];
         $pity = $analytics->forAccount($account)['pity'];
         $query = $account->wishes();

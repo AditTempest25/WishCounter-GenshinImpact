@@ -16,8 +16,10 @@
 - Store only SHA-256 hashes of temporary sync tokens.
 - Expire sync sessions quickly.
 - Make `wish_id` unique per account.
-- Apply request-size and rate limits before public launch.
-- Add authenticated account ownership checks before public launch.
+- Authentication and per-user archive ownership checks are implemented; see [Multiuser setup](MULTIUSER.md).
+- The web proxy limits request sizes and the API rate-limits routes. Configure matching upload limits on the production reverse proxy.
+- Keep the API bearer token in the web server's HttpOnly cookie, and require HTTPS in production.
+- Legacy archives remain unowned until explicitly assigned to a registered user by the local administrator.
 
 ## Privacy
 

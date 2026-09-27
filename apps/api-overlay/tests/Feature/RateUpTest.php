@@ -11,6 +11,12 @@ class RateUpTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(\App\Models\User::factory()->create(), "sanctum");
+    }
+
     private function addWish($account, string $id, string $name, string $date, string $group = '301', string $raw = '301'): void
     {
         $account->wishes()->create([
@@ -22,7 +28,7 @@ class RateUpTest extends TestCase
 
     public function test_guarantee_follows_shared_banner_history_and_survives_history_filters(): void
     {
-        $account = GenshinAccount::create(['uid' => '800000020']);
+        $account = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000020']);
         $this->addWish($account, '1001', 'Mona', '2020-10-01');
         $this->addWish($account, '1002', 'Venti', '2020-10-02', '301', '400');
         $this->addWish($account, '1003', 'Venti', '2020-10-03');
@@ -44,7 +50,7 @@ class RateUpTest extends TestCase
 
     public function test_featured_standard_character_is_rate_on_and_unknown_history_is_not_assumed(): void
     {
-        $account = GenshinAccount::create(['uid' => '800000021']);
+        $account = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000021']);
         $this->addWish($account, '1001', 'Keqing', '2021-02-20');
         $result = app(RateUpService::class)->forAccount($account);
         $this->assertSame('on', $result['history']['1001']['result']);

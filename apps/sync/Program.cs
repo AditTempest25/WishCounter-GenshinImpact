@@ -22,21 +22,24 @@ internal static class Program
 
     public static async Task<int> Main(string[] args)
     {
+        string? sessionToken = null;
         Console.Title = "Irminsul Sync";
         Console.WriteLine("Irminsul Sync POC v0.1");
         Console.WriteLine("-----------------------");
 
         try
         {
-            var sessionToken = GetSessionToken(args);
+            sessionToken = GetSessionToken(args);
             if (string.IsNullOrWhiteSpace(sessionToken))
             {
                 Console.Error.WriteLine("Missing sync session. Launch this app from the Irminsul Wish web dashboard.");
                 return 2;
             }
 
+            await ReportProgress(sessionToken, "connected");
             if (!IsGenshinRunning())
             {
+                await ReportProgress(sessionToken, "game_closed");
                 Console.Error.WriteLine("Genshin Impact is not running. Launch it through HoYoPlay first, then retry sync.");
                 KeepErrorVisible();
                 return 3;
@@ -48,6 +51,7 @@ internal static class Program
             var cachedWishUrl = WishUrlExtractor.FindLatestWishUrl();
             if (cachedWishUrl is null)
             {
+                await ReportProgress(sessionToken, "history_missing");
                 Console.Error.WriteLine("No Wish History URL found. In Genshin, open Wish -> History and wait for it to load, then press Start Sync again.");
                 KeepErrorVisible();
                 return 4;
@@ -56,6 +60,7 @@ internal static class Program
             Console.WriteLine("Wish History session found locally.");
             Console.WriteLine("Fetching wish records directly from HoYoverse...");
 
+            await ReportProgress(sessionToken, "fetching");
             var fetcher = new HoyoWishFetcher(Http, cachedWishUrl);
             var result = await fetcher.FetchAllAsync();
 
@@ -68,7 +73,7 @@ internal static class Program
                 Console.WriteLine($"Fetched {result.Wishes.Count} records locally for UID {result.Uid ?? "unknown"}.");
             }
 
-            var apiBase = (Environment.GetEnvironmentVariable("IRMINSUL_API_BASE") ?? DefaultApiBase).TrimEnd('/');
+            var apiBase = GetApiBase();
             var endpoint = $"{apiBase}/sync-sessions/{Uri.EscapeDataString(sessionToken)}/wishes";
 
             // Deliberately upload normalized wish data only. cachedWishUrl/authkey never leaves this process.
@@ -79,6 +84,7 @@ internal static class Program
                 Wishes: result.Wishes
             );
 
+            await ReportProgress(sessionToken, "uploading");
             using var uploadResponse = await UploadHttp.PostAsJsonAsync(endpoint, payload, JsonDefaults.Options);
             var uploadBody = await uploadResponse.Content.ReadAsStringAsync();
             if (!uploadResponse.IsSuccessStatusCode)
@@ -92,11 +98,42 @@ internal static class Program
         }
         catch (Exception ex)
         {
+            if (sessionToken is not null) await ReportProgress(sessionToken, "failed");
             Console.Error.WriteLine();
             Console.Error.WriteLine($"Sync failed: {ex.Message}");
             KeepErrorVisible();
             return 1;
         }
+    }
+
+    private static string GetApiBase()
+    {
+        var configured = Environment.GetEnvironmentVariable("IRMINSUL_API_BASE");
+        var configPath = Path.Combine(AppContext.BaseDirectory, "irminsul-config.json");
+        if (string.IsNullOrWhiteSpace(configured) && File.Exists(configPath))
+        {
+            using var config = JsonDocument.Parse(File.ReadAllText(configPath));
+            configured = config.RootElement.GetProperty("apiBase").GetString();
+        }
+        var value = (configured ?? DefaultApiBase).TrimEnd('/');
+        if (!Uri.TryCreate(value, UriKind.Absolute, out var uri)
+            || (uri.Scheme != "https" && !(uri.Scheme == "http" && uri.IsLoopback))
+            || !string.IsNullOrEmpty(uri.UserInfo) || !string.IsNullOrEmpty(uri.Query)
+            || !string.IsNullOrEmpty(uri.Fragment))
+            throw new InvalidOperationException("Companion API configuration must use HTTPS (or localhost for development).");
+        return value;
+    }
+
+    private static async Task ReportProgress(string token, string stage)
+    {
+        // Only allowlisted stage names leave the PC; never send upstream exceptions or URLs.
+        try
+        {
+            var apiBase = GetApiBase();
+            using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            using var response = await Http.PostAsJsonAsync($"{apiBase}/sync-sessions/{Uri.EscapeDataString(token)}/progress", new { stage }, timeout.Token);
+        }
+        catch { /* Progress reporting must not prevent a valid history upload. */ }
     }
 
     private static bool IsGenshinRunning()

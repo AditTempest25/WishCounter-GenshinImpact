@@ -13,9 +13,9 @@ class AccountStatsController extends Controller
 {
     public function show(string $uid, PityService $pity, RateUpService $rateUp, WishAnalyticsService $analytics): JsonResponse
     {
-        $account = GenshinAccount::where('uid', $uid)->firstOrFail();
+        $account = GenshinAccount::where('user_id', auth()->id())->where('uid', $uid)->firstOrFail();
         $analysis = $analytics->forAccount($account);
-        $latestSync = SyncSession::where('uid', $account->uid)->where('status', 'completed')
+        $latestSync = SyncSession::where('user_id', auth()->id())->where('uid', $account->uid)->where('status', 'completed')
             ->whereNotNull('completed_at')->orderByDesc('completed_at')->orderByDesc('id')->first();
 
         return response()->json([
@@ -23,7 +23,7 @@ class AccountStatsController extends Controller
             'region' => $account->region,
             'last_synced_at' => $latestSync?->completed_at?->toIso8601String(),
             'last_sync_summary' => $latestSync?->summary,
-            'analytics' => ['overall' => $analysis['summary'], 'banners' => $analysis['groups']],
+            'analytics' => ['overall' => $analysis['summary'], 'banners' => $analysis['groups'], 'months' => $analysis['months'], 'journey' => $analysis['journey']],
             'total_wishes' => $account->wishes()->count(),
             'banners' => $pity->forAccount($account),
             'next_guarantee' => $rateUp->forAccount($account)['next'],

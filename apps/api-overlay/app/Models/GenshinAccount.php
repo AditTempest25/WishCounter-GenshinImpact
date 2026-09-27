@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GenshinAccount extends Model
 {
-    protected $fillable = ['uid', 'region'];
+    protected $fillable = ['uid', 'region', 'user_id'];
 
     public function wishes(): HasMany
     {

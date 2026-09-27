@@ -15,9 +15,13 @@ class WishAnalyticsService
         $seen = [];
         $intervals = [];
         $pity = [];
+        $months = [];
+        $journey = [];
         foreach ($account->wishes()->orderBy('wish_time')->orderBy('wish_id')
-            ->get(['wish_id', 'uigf_gacha_type', 'rank_type']) as $wish) {
+            ->get(['wish_id', 'uigf_gacha_type', 'rank_type', 'wish_time', 'item_name']) as $wish) {
             $group = (string) $wish->uigf_gacha_type;
+            $month = substr($wish->wish_time, 0, 7);
+            $months[$month][$group] = ($months[$month][$group] ?? 0) + 1;
             $groups[$group] ??= ['five_stars' => 0, 'four_stars' => 0];
             $pulls[$group] = ($pulls[$group] ?? 0) + 1;
             if ((int) $wish->rank_type === 4) {
@@ -29,6 +33,8 @@ class WishAnalyticsService
             $groups[$group]['five_stars']++;
             $complete = $seen[$group] ?? false;
             $pity[$wish->wish_id] = ['pulls' => $pulls[$group], 'complete' => $complete];
+            $journey[] = ['id' => $wish->wish_id, 'banner' => $group, 'name' => $wish->item_name,
+                'time' => $wish->wish_time, 'pulls' => $pulls[$group], 'complete' => $complete];
             // Beginners' Wish has different mechanics and is excluded from interval metrics.
             if ($complete && $group !== '100') $intervals[$group][] = $pulls[$group];
             $seen[$group] = true;
@@ -42,7 +48,7 @@ class WishAnalyticsService
         }
         unset($metrics);
         return ['summary' => array_merge($summary, $this->intervalMetrics($allIntervals)),
-            'groups' => $groups, 'pity' => $pity];
+            'groups' => $groups, 'pity' => $pity, 'months' => $months, 'journey' => $journey];
     }
 
     private function intervalMetrics(array $values): array

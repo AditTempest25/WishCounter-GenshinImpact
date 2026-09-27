@@ -11,6 +11,12 @@ class DashboardInsightsTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(\App\Models\User::factory()->create(), "sanctum");
+    }
+
     private function wish($account, string $id, string $group, int $rarity, string $name = 'Ineffa', ?string $itemId = '10000116', string $kind = 'Karakter', string $date = '2026-09-17 12:00:00', ?string $raw = null): void
     {
         $account->wishes()->create(['wish_id' => $id, 'gacha_type' => $raw ?? $group,
@@ -20,7 +26,7 @@ class DashboardInsightsTest extends TestCase
 
     public function test_intervals_keep_banner_groups_separate_and_exclude_initial_partial_history(): void
     {
-        $account = GenshinAccount::create(['uid' => '800000040']);
+        $account = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000040']);
         $this->wish($account, '1', '301', 3);
         $this->wish($account, '2', '301', 5, raw: '400');
         $this->wish($account, '3', '302', 5);
@@ -49,8 +55,8 @@ class DashboardInsightsTest extends TestCase
 
     public function test_filters_and_item_details_are_literal_inclusive_and_account_scoped(): void
     {
-        $account = GenshinAccount::create(['uid' => '800000041']);
-        $other = GenshinAccount::create(['uid' => '800000042']);
+        $account = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000041']);
+        $other = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000042']);
         $this->wish($account, '100', '301', 5, date: '2026-09-17 00:00:00');
         $this->wish($account, '101', '200', 5, itemId: null, date: '2026-09-17 23:59:59');
         $this->wish($account, '102', '302', 4, 'Magic 100%', '22', 'Senjata', '2026-09-18 00:00:00');
@@ -69,7 +75,7 @@ class DashboardInsightsTest extends TestCase
 
     public function test_empty_and_beginners_history_do_not_fabricate_an_average(): void
     {
-        $account = GenshinAccount::create(['uid' => '800000043']);
+        $account = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000043']);
         $empty = app(WishAnalyticsService::class)->forAccount($account);
         $this->assertNull($empty['summary']['average_pity']);
         $this->assertSame(0, $empty['summary']['five_stars']);

@@ -10,6 +10,12 @@ class SyncFlowTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(\App\Models\User::factory()->create(), "sanctum");
+    }
+
     public function test_sync_hashes_token_imports_deduplicates_and_calculates_shared_pity(): void
     {
         $created = $this->postJson('/api/sync-sessions')->assertCreated()->json();

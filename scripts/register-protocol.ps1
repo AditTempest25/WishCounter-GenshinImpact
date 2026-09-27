@@ -1,6 +1,8 @@
+param([string]$ExecutablePath)
 $ErrorActionPreference = "Stop"
 $Root = Split-Path -Parent $PSScriptRoot
 $Exe = Join-Path $Root "dist\sync\IrminsulSync.exe"
+if ($ExecutablePath) { $Exe = [System.IO.Path]::GetFullPath($ExecutablePath) }
 
 if (-not (Test-Path $Exe)) {
     throw "IrminsulSync.exe not found. Run .\scripts\build-sync.ps1 first."

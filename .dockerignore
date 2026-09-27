@@ -1,0 +1,12 @@
+**
+!apps/
+!apps/api-overlay/
+!apps/api-overlay/**
+!deploy/
+!deploy/api/
+!deploy/api/**
+**/.env
+**/.env.*
+**/tests/
+**/*.sqlite*
+**/vendor/

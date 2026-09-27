@@ -10,9 +10,15 @@ class WishHistoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->actingAs(\App\Models\User::factory()->create(), "sanctum");
+    }
+
     public function test_history_is_paginated_filtered_and_scoped_to_the_account(): void
     {
-        $account = GenshinAccount::create(['uid' => '800000010']);
+        $account = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000010']);
         for ($index = 1; $index <= 25; $index++) {
             $account->wishes()->create([
                 'wish_id' => (string) (1000 + $index), 'gacha_type' => $index % 2 ? '400' : '302',
@@ -21,7 +27,7 @@ class WishHistoryTest extends TestCase
                 'wish_time' => '2026-09-21 10:00:00',
             ]);
         }
-        $other = GenshinAccount::create(['uid' => '800000011']);
+        $other = GenshinAccount::create(['user_id' => auth()->id(), 'uid' => '800000011']);
         $other->wishes()->create([
             'wish_id' => '9999', 'gacha_type' => '301', 'uigf_gacha_type' => '301',
             'item_name' => 'Other account', 'item_type' => 'Character', 'rank_type' => 5,

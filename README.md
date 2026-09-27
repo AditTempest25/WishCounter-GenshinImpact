@@ -107,7 +107,27 @@ dashboard; it does not terminate an already running companion.
 
 ## Current POC limitations
 
-- Authentication/login is intentionally not implemented yet.
-- Character featured-guarantee calculation is not implemented yet because it requires reliable banner metadata for each historical banner.
+- Login, logout, password change, and per-user archive ownership are implemented. See [multiuser setup](docs/MULTIUSER.md) before deployment.
+- Rate-on/off and featured guarantee use bundled historical banner metadata; unrecognized items, missing metadata, and transition dates remain unknown.
 - The companion currently targets Windows PC installations.
 - The cache extractor is designed around the current `webCaches/.../Cache/Cache_Data/data_2` method and may need maintenance after Genshin client updates.
+
+## Archive tools and companion installer
+
+The dashboard includes native Irminsul JSON backup/import, monthly charts, a manual Character Event target planner, UID privacy, and PNG summary cards. See [archive tools](docs/ARCHIVE_TOOLS.md) for limits and verification notes.
+
+Build the downloadable Windows companion package from the repository root:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/package-companion.ps1
+```
+
+The ZIP is generated in `dist/IrminsulSync-Windows.zip` and copied to `apps/web/public/downloads` for the dashboard download button. Generated executables and ZIPs are not committed. Rebuild this package for a fresh checkout before distributing the web app. Extract the ZIP and run `Install.cmd` to install the handler for the current Windows user. No administrator or startup service is required.
+
+## Multiuser accounts
+
+Register an Irminsul account in the web UI. Each user sees only their own archives. Existing local archives require explicit assignment to the registered owner; see [migration and authentication details](docs/MULTIUSER.md). The frontend uses a same-origin proxy with an HttpOnly session cookie; configure `API_INTERNAL_BASE` and `APP_ORIGIN` when deploying. No deployment is performed automatically.
+
+## Deployment
+
+See [deployment setup](docs/DEPLOYMENT.md) for Vercel + Render + Neon without a custom domain.

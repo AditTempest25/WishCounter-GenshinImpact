@@ -64,7 +64,9 @@ if (Get-Command composer -ErrorAction SilentlyContinue) {
 
     Push-Location $ApiPath
     try {
-        php artisan key:generate --force
+        composer install --no-interaction
+        if ($LASTEXITCODE -ne 0) { throw "Composer dependencies could not be installed." }
+        if ($envText -notmatch '(?m)^APP_KEY=.+') { php artisan key:generate --force }
         php artisan migrate --force
     }
     finally {

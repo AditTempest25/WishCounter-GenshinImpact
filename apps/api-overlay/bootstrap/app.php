@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // API is intentionally stateless in the POC.
+        $middleware->api(prepend: [\App\Http\Middleware\PrivateApiResponses::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // Keep default Laravel JSON exception behavior for API routes.

@@ -1,6 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import type { SignedInUser, OwnedAccount } from "./AuthShell";
+import ArchiveTools from "./ArchiveTools";
+import { JourneyCharts, WishPlanner, ShareArchive } from "./JourneyTools";
+import ConnectionCheck from "./ConnectionCheck";
 import WishHistory from "./WishHistory";
 import ItemIcon from "./ItemIcon";
 import WishInsights, { SyncSummaryLine } from "./WishInsights";
@@ -22,7 +26,9 @@ function errorText(error: unknown) {
   return error instanceof Error ? error.message : "Koneksi gagal. Coba lagi sebentar.";
 }
 
-export default function WishDashboard() {
+export default function WishDashboard({ user, initialAccounts }: { user: SignedInUser; initialAccounts: OwnedAccount[] }) {
+  const [accounts, setAccounts] = useState(initialAccounts);
+  const accountStorageKey = `irminsul:lastUid:${user.id}`;
   const [session, setSession] = useState<SyncSession | null>(null);
   const [stats, setStats] = useState<AccountStats | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +36,8 @@ export default function WishDashboard() {
   const [loading, setLoading] = useState(true);
   const [knownUid, setKnownUid] = useState<string | null>(null);
   const [filter, setFilter] = useState("all");
+  const [privateMode, setPrivateMode] = useState(true);
+  const [launchHint, setLaunchHint] = useState(false);
   const [copied, setCopied] = useState(false);
   const [connectionIssue, setConnectionIssue] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -38,7 +46,9 @@ export default function WishDashboard() {
 
   useEffect(() => {
     let active = true;
-    const uid = readLocal("irminsul:lastUid");
+    setPrivateMode(readLocal("irminsul:privacy:v1") !== "off");
+    const saved = readLocal(accountStorageKey) ?? readLocal("irminsul:lastUid");
+    const uid = initialAccounts.find(account => account.uid === saved)?.uid ?? initialAccounts[0]?.uid ?? null;
     setKnownUid(uid);
     if (uid) {
       getAccountStats(uid).then(data => { if (active) setStats(data); })
@@ -47,6 +57,16 @@ export default function WishDashboard() {
     } else setLoading(false);
     return () => { active = false; syncGeneration.current++; if (timer.current) clearInterval(timer.current); if (copyTimer.current) clearTimeout(copyTimer.current); };
   }, []);
+
+  useEffect(() => {
+    if (stats) setAccounts(previous => previous.some(account => account.uid === stats.uid) ? previous : [...previous, { uid: stats.uid, region: stats.region }]);
+  }, [stats]);
+
+  async function selectAccount(uid: string) {
+    if (busy) return;
+    setStats(null); setKnownUid(uid); setLoading(true); setError(null); setSession(null); writeLocal(accountStorageKey, uid);
+    try { setStats(await getAccountStats(uid)); } catch (e) { setError(errorText(e)); } finally { setLoading(false); }
+  }
 
   async function refreshAccount() {
     if (!knownUid) return;
@@ -57,12 +77,13 @@ export default function WishDashboard() {
   async function startSync() {
     const generation = ++syncGeneration.current;
     if (timer.current) clearInterval(timer.current);
-    setBusy(true); setSession(null); setError(null); setConnectionIssue(false);
+    setBusy(true); setSession(null); setError(null); setConnectionIssue(false); setLaunchHint(false);
     try {
       const created = await createSyncSession();
       if (generation !== syncGeneration.current) return;
       setSession(created);
       window.location.href = created.protocol_uri;
+      const startedAt = Date.now();
       let polling = false;
       timer.current = setInterval(async () => {
         if (generation !== syncGeneration.current || polling) return;
@@ -76,12 +97,13 @@ export default function WishDashboard() {
           const current = await getSyncSession(created.token);
           if (generation !== syncGeneration.current) return;
           setConnectionIssue(false);
+          setLaunchHint(current.status === "waiting" && Date.now() - startedAt > 20000);
           setSession({ ...current, protocol_uri: created.protocol_uri });
           if (current.status === "completed" || current.status === "failed") {
             if (timer.current) clearInterval(timer.current);
             timer.current = null;
             if (current.status === "completed" && current.uid) {
-              writeLocal("irminsul:lastUid", current.uid);
+              writeLocal(accountStorageKey, current.uid);
               setKnownUid(current.uid);
               try {
                 const data = await getAccountStats(current.uid);
@@ -99,6 +121,10 @@ export default function WishDashboard() {
   function cancelSync() {
     syncGeneration.current++; if (timer.current) clearInterval(timer.current);
     timer.current = null; setBusy(false); setSession(null); setError(null); setConnectionIssue(false);
+  }
+  async function importedAccount(uid: string) {
+    writeLocal(accountStorageKey, uid); setKnownUid(uid); setLoading(true); setError(null); setSession(null); setStats(null);
+    try { setStats(await getAccountStats(uid)); } catch (e) { setError(`Impor selesai, tetapi akun belum dimuat. ${errorText(e)}`); } finally { setLoading(false); }
   }
   async function copyUid() {
     if (!stats) return;
@@ -120,6 +146,9 @@ export default function WishDashboard() {
         <a href="#banners"><Layers3 size={18} /> Banner pity</a>
         <a href="#recent"><History size={18} /> 5★ timeline</a>
         <a href="#history"><History size={18} /> Wish history</a>
+        <a href="#journey"><Orbit size={18} /> Perjalanan wish</a>
+        <a href="#planner"><Star size={18} /> Target wish</a>
+        <a href="#backup"><ShieldCheck size={18} /> Backup & restore</a>
         <a href="#guide"><BookOpen size={18} /> Sync guide</a>
       </nav>
       <div className="privacy"><ShieldCheck size={22} /><strong>Your wishes. Your archive.</strong><p>Authkey tetap di PC kamu. Hanya riwayat wish yang dikirim ke API.</p><span>WINDOWS COMPANION</span></div>
@@ -134,11 +163,12 @@ export default function WishDashboard() {
           <div className="hero-shade" /><div className="hero-content"><p className="eyebrow"><Sparkles size={13} /> EVERY WISH, REMEMBERED</p><h2>Let your wishes<br /><em>take root.</em></h2><p>Setiap bintang punya cerita.<br />Simpan perjalanan wish kamu di satu tempat.</p><a href="#banners">Explore your wishes <ArrowUpRight size={17} /></a></div><span className="hero-caption">THE IRMINSUL ARCHIVE</span>
         </section>
         <section className="account-strip" aria-label="Akun dan sinkronisasi">
-          <div className="account-identity"><span className="avatar"><Leaf size={24} /></span><div><span className="label">{stats ? "CONNECTED ACCOUNT" : "YOUR ACCOUNT"}</span><div className="account-uid">{loading ? "Memuat akun…" : stats ? `UID ${stats.uid}` : "Mulai perjalananmu"}{stats && <button className="icon-button" aria-label={copied ? "UID tersalin" : "Salin UID"} onClick={copyUid}>{copied ? <Check size={15} /> : <Copy size={15} />}</button>}</div><span className="subtle">{stats ? stats.region || "Genshin Impact" : "Hubungkan riwayat wish pertamamu"}</span></div></div>
+          <div className="account-identity"><span className="avatar"><Leaf size={24} /></span><div><span className="label">{stats ? "CONNECTED ACCOUNT" : "YOUR ACCOUNT"}</span><div className="account-uid">{loading ? "Memuat akun…" : stats ? `UID ${privateMode ? "•••••••••" : stats.uid}` : "Mulai perjalananmu"}{stats && !privateMode && <button className="icon-button" aria-label={copied ? "UID tersalin" : "Salin UID"} onClick={copyUid}>{copied ? <Check size={15} /> : <Copy size={15} />}</button>}</div><span className="subtle">{stats ? stats.region || "Genshin Impact" : "Hubungkan riwayat wish pertamamu"}</span></div></div>
           <div className="last-sync"><span className="label"><Clock3 size={12} /> LAST SYNC</span><span>{syncDate}</span></div>
           <button className="primary" onClick={startSync} disabled={busy || loading}><RefreshCw size={16} className={busy ? "spin" : ""} />{busy ? "Syncing…" : "Start Sync"}</button>
         </section>
-        {(busy || session) && <section className={`sync-panel ${session?.status === "completed" ? "success" : ""}`} aria-live="polite"><div><strong>{session?.status === "completed" ? "Arsip berhasil diperbarui" : session?.status === "failed" ? "Sync belum berhasil" : !session ? "Menyiapkan sesi sync…" : connectionIssue ? "Koneksi API terputus. Mencoba lagi…" : "Menunggu hasil dari Irminsul Sync"}</strong><p>{session?.status === "completed" ? `${value(session.new_wishes)} wish baru ditambahkan.` : session?.status === "failed" ? session.message || "Coba mulai sync kembali." : "Buka Wish → History di Genshin, lalu izinkan Chrome/Edge membuka companion."}</p>{session?.status === "completed" && session.summary && <SyncSummaryLine summary={session.summary} />}</div>{busy && <div className="sync-actions">{session?.protocol_uri && <a className="secondary" href={session.protocol_uri}>Buka Irminsul Sync <ArrowUpRight size={14} /></a>}<button className="text-button" onClick={cancelSync}>Batalkan</button></div>}</section>}
+        <div className="privacy-controls">{accounts.length > 1 && <label>Akun Genshin<select aria-label="Pilih akun Genshin" value={knownUid ?? ""} disabled={busy || loading} onChange={e => void selectAccount(e.target.value)}>{accounts.map((account, index) => <option key={account.uid} value={account.uid}>{privateMode ? `Akun ${index + 1}` : account.uid}</option>)}</select></label>}<label><input type="checkbox" checked={privateMode} onChange={e => { setPrivateMode(e.target.checked); writeLocal("irminsul:privacy:v1", e.target.checked ? "on" : "off"); }} /> Sembunyikan UID</label><ShareArchive stats={stats} privateMode={privateMode} /></div>
+        {(busy || session) && <section className={`sync-panel ${session?.status === "completed" ? "success" : ""}`} aria-live="polite"><div><strong>{session?.status === "completed" ? "Arsip berhasil diperbarui" : session?.status === "failed" ? "Sync belum berhasil" : !session ? "Menyiapkan sesi sync…" : connectionIssue ? "Koneksi API terputus. Mencoba lagi…" : session?.status === "syncing" ? "Companion terhubung" : "Menunggu Irminsul Sync terbuka"}</strong><p>{session?.status === "completed" ? `${value(session.new_wishes)} wish baru ditambahkan.` : session?.status === "failed" ? session.message || "Coba mulai sync kembali." : session?.status === "syncing" ? session.message : launchHint ? "Companion belum merespons. Coba tautan Buka Irminsul Sync. Jika tetap tidak muncul, buka bantuan koneksi di bawah." : "Buka Wish → History di Genshin, lalu izinkan Chrome/Edge membuka companion."}</p>{session?.status === "completed" && session.summary && <SyncSummaryLine summary={session.summary} />}</div>{busy && <div className="sync-actions">{session?.protocol_uri && <a className="secondary" href={session.protocol_uri}>Buka Irminsul Sync <ArrowUpRight size={14} /></a>}<button className="text-button" onClick={cancelSync}>Batalkan</button></div>}</section>}
         {error && <div className="error" role="alert"><span>{error}</span>{knownUid && <button className="secondary" disabled={loading || busy} onClick={refreshAccount}>Muat ulang akun</button>}</div>}
         <section className="summary-grid" aria-label="Ringkasan wish" aria-busy={loading}>
           {[{ name: "Total wishes", number: stats?.total_wishes, icon: Star, detail: "Seluruh arsip" }, ...banners.slice(0, 3).map(b => ({ name: b.name, number: stats?.banners[b.id]?.total_wishes, icon: b.icon, detail: "Stored wishes" }))].map(metric => <article className="summary" key={metric.name}><div><span>{metric.name}</span><metric.icon size={17} /></div><strong>{value(metric.number)}</strong><span className="subtle">{metric.detail}</span></article>)}
@@ -146,10 +176,14 @@ export default function WishDashboard() {
         <WishInsights stats={stats} />
         <section id="banners" className="content-section"><div className="section-heading"><div><p className="eyebrow">THE NEXT FALLING STAR</p><h2>Banner overview</h2></div><span className="subtle">Pity dari riwayat tersimpan</span></div>
           <div className="filters" role="group" aria-label="Filter banner">{[{ id: "all", name: "All banners" }, ...banners].map(b => <button key={b.id} aria-pressed={filter === b.id} onClick={() => setFilter(b.id)}>{b.name}</button>)}</div>
-          <div className="banner-grid">{banners.filter(b => filter === "all" || b.id === filter).map(meta => { const data = stats?.banners[meta.id]; const cap = data?.hard_pity ?? meta.cap; return <article className={`banner-card ${meta.theme}`} key={meta.id}><div className="banner-heading"><span className="banner-icon"><meta.icon size={22} /></span><div><h3>{meta.name}</h3><p>{meta.subtitle}</p></div><span className="rarity">5 <Star size={12} fill="currentColor" /></span></div><div className="pity-row"><div><span className="label">CURRENT PITY</span><strong>{value(data?.current_pity)}<small> / {cap}</small></strong></div><span className="pity-label">{data ? `${Math.max(0, cap - data.current_pity)} hingga hard pity` : "Menunggu riwayat"}</span></div><div className="meter" role="progressbar" aria-label={`${meta.name} pity`} aria-valuenow={data?.current_pity} aria-valuemin={0} aria-valuemax={cap} aria-valuetext={data ? `${data.current_pity} dari ${cap}` : "Belum ada data"}><div style={{ width: `${Math.min(100, (data?.current_pity ?? 0) / cap * 100)}%` }} /></div><div className="meter-labels"><span>0</span><span>{cap} hard pity</span></div><div className="last-pull">{data?.last_5_star ? <ItemIcon itemId={data.last_5_star.item_id} name={data.last_5_star.name} itemType={data.last_5_star.item_type} /> : <Star size={16} />}<div><span className="label">LAST 5-STAR</span><strong>{data?.last_5_star?.name ?? "Belum ada di arsip"}</strong></div><span>{value(data?.total_wishes)}<small> wishes</small></span></div><p className="banner-note">{meta.note}</p>{["301", "302"].includes(meta.id) && <div className={`guarantee-status guarantee-${stats?.next_guarantee?.[meta.id] ?? "unknown"}`}><span className="label">5★ BERIKUTNYA</span><strong>{stats?.next_guarantee?.[meta.id] === "guaranteed" ? "Guaranteed rate-up" : stats?.next_guarantee?.[meta.id] === "not_guaranteed" ? meta.id === "301" ? "50/50 · Belum guaranteed" : "75/25 · Belum guaranteed" : "Belum diketahui"}</strong><p>{meta.id === "301" ? "Dari arsip tersimpan; Capturing Radiance tidak dihitung." : "Untuk salah satu senjata rate-up, bukan pilihan Epitomized Path."}</p></div>}</article>; })}</div>
+          <div className="banner-grid">{banners.filter(b => filter === "all" || b.id === filter).map(meta => { const data = stats?.banners[meta.id]; const cap = data?.hard_pity ?? meta.cap; return <article className={`banner-card ${meta.theme}`} key={meta.id}><div className="banner-heading"><span className="banner-icon"><meta.icon size={22} /></span><div><h3>{meta.name}</h3><p>{meta.subtitle}</p></div><span className="rarity">5 <Star size={12} fill="currentColor" /></span></div><div className="pity-row"><div><span className="label">CURRENT PITY</span><strong>{value(data?.current_pity)}<small> / {cap}</small></strong></div><span className="pity-label">{data ? `${Math.max(0, cap - data.current_pity)} hingga hard pity` : "Menunggu riwayat"}</span></div><div className="meter" role="progressbar" aria-label={`${meta.name} pity`} aria-valuenow={data?.current_pity} aria-valuemin={0} aria-valuemax={cap} aria-valuetext={data ? `${data.current_pity} dari ${cap}` : "Belum ada data"}><div style={{ width: `${Math.min(100, (data?.current_pity ?? 0) / cap * 100)}%` }} /></div><div className="meter-labels"><span>0</span><span>{cap} hard pity</span></div><div className="last-pull">{data?.last_5_star ? <ItemIcon itemId={data.last_5_star.item_id} name={data.last_5_star.name} itemType={data.last_5_star.item_type} /> : <Star size={16} />}<div><span className="label">LAST 5-STAR</span><strong>{data?.last_5_star?.name ?? "Belum ada di arsip"}</strong></div><span>{value(data?.total_wishes)}<small> wishes</small></span></div><p className="banner-note">{meta.note}</p>{["301", "302"].includes(meta.id) && <div className={`guarantee-status guarantee-${stats?.next_guarantee?.[meta.id] ?? "unknown"}`}><span className="label">5★ BERIKUTNYA</span><strong>{stats?.next_guarantee?.[meta.id] === "guaranteed" ? "Guaranteed rate-up" : stats?.next_guarantee?.[meta.id] === "not_guaranteed" ? meta.id === "301" ? "50/50 · Belum guaranteed" : "75/25 · Belum guaranteed" : "Belum diketahui"}</strong><p>{meta.id === "301" ? "Dari arsip tersimpan; Capturing Radiance tidak dihitung." : "Untuk salah satu senjata rate-up, bukan pilihan Epitomized Path."}</p><details><summary>Kenapa statusnya begitu?</summary><p>Hasil 5★ terakhir: {data?.last_5_star?.name ?? "belum tercatat"}{data?.last_5_star ? ` (${data.last_5_star.time})` : ""}. Hasil dibandingkan dengan daftar featured pada tanggal wish. Rate off membuat 5★ berikutnya guaranteed rate-up; rate on mengakhiri guaranteed sebelumnya.</p><p>Jika tanggal berada di pergantian banner, metadata belum tersedia, atau item tidak bisa dikenali, status ditampilkan belum diketahui. Riwayat yang hilang setelah hasil terakhir juga dapat mengubah kondisi sebenarnya.</p></details></div>}</article>; })}</div>
           <p className="data-note">Riwayat yang tidak lengkap bisa membuat hitungan pity lebih rendah dari kondisi di game.</p>
         </section>
+        <JourneyCharts stats={stats} />
+        <WishPlanner key={`plan:${stats?.uid ?? "none"}`} stats={stats} />
         <WishHistory key={stats?.uid ?? "no-account"} uid={stats?.uid ?? null} revision={stats} />
+        <ArchiveTools uid={stats?.uid ?? null} privateMode={privateMode} disabled={busy || loading} onImported={importedAccount} />
+        <ConnectionCheck session={session} />
         <section className="guide" id="guide"><div className="section-heading"><div><p className="eyebrow">READY WHEN YOU ARE</p><h2>A little ritual. A fresh archive.</h2></div><BookOpen size={24} /></div><ol><li><span>01</span><div><h3>Buka Genshin</h3><p>Jalankan game lewat HoYoPlay di PC yang sama.</p></div></li><li><span>02</span><div><h3>Muat Wish History</h3><p>Buka Wish → History sampai riwayat selesai dimuat.</p></div></li><li><span>03</span><div><h3>Sync & return</h3><p>Klik Start Sync dan izinkan Irminsul Sync terbuka.</p></div></li></ol></section>
         <footer><span><Leaf size={14} /> Irminsul Wish</span><p>Fan-made wish archive · Tidak berafiliasi dengan HoYoverse.</p><a href="#overview">Back to top ↑</a></footer>
       </main>
