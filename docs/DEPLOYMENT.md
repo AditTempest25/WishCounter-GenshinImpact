@@ -33,7 +33,7 @@ After the real API URL is assigned, run from PowerShell 7 at the repository root
 
 The ZIP includes irminsul-config.json beside the executable. Its installer copies this configuration with the executable. An existing IRMINSUL_API_BASE environment override takes precedence; remove or update an old localhost override before testing online.
 
-The command copies the package to apps/web/public/downloads/IrminsulSync-Windows.zip. This generated binary is intentionally not committed. Deploy the frontend from the local directory with Vercel CLI after packaging so the download is included. Git-only Vercel builds need the release ZIP supplied separately; do not share a deployment with a missing or localhost-configured download.
+The command also copies the package to apps/web/public/downloads/IrminsulSync-Windows.zip. This generated binary is intentionally not committed. Upload dist/IrminsulSync-Windows.zip as a GitHub Release asset. The frontend download path redirects to the pinned companion-v1.0.0 release asset through apps/web/next.config.ts, so Git-based Vercel deployments do not need to contain the ZIP. For a new companion version, publish and verify its asset first, then update the redirect destination and deploy the frontend. The redirect is temporary so browsers can pick up a future release.
 
 ## Verify before sharing
 
