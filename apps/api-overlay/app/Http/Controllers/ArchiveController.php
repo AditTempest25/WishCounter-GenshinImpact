@@ -45,6 +45,8 @@ class ArchiveController extends Controller
         ]);
         $result = DB::transaction(function () use ($data) {
             $account = GenshinAccount::firstOrCreate(['user_id' => auth()->id(), 'uid' => $data['account']['uid']], ['region' => $data['account']['region'] ?? null]);
+            // Use the same account lock as companion uploads to avoid concurrent inserts.
+            GenshinAccount::whereKey($account->id)->lockForUpdate()->firstOrFail();
             $added = 0;
             foreach ($data['wishes'] as $row) {
                 $values = ['gacha_type' => $row['gacha_type'],

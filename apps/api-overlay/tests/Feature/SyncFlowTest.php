@@ -10,6 +10,42 @@ class SyncFlowTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_large_sync_uses_bounded_queries_and_deduplicates_across_batches(): void
+    {
+        $records = [];
+        for ($i = 0; $i < 975; $i++) {
+            $records[] = [
+                'id' => (string) (100000 + $i), 'gacha_type' => '400',
+                'uigf_gacha_type' => '400', 'name' => 'Batch test',
+                'item_type' => 'Character', 'rank_type' => '5',
+                'time' => '2026-09-21 10:00:00',
+            ];
+        }
+        // Duplicate both inside a batch and across batch boundaries.
+        array_splice($records, 1, 0, [$records[0]]);
+        $records[] = $records[0];
+        $payload = ['source' => 'windows-companion', 'uid' => '800000099', 'wishes' => $records];
+        $token = $this->postJson('/api/sync-sessions')->json('token');
+        \Illuminate\Support\Facades\DB::enableQueryLog();
+        \Illuminate\Support\Facades\DB::flushQueryLog();
+        try {
+            $this->postJson("/api/sync-sessions/$token/wishes", $payload)
+                ->assertOk()->assertJsonPath('new_wishes', 975);
+            $queries = \Illuminate\Support\Facades\DB::getQueryLog();
+        } finally {
+            \Illuminate\Support\Facades\DB::disableQueryLog();
+        }
+        $this->assertLessThan(30, count($queries), 'Bulk sync must not issue queries per wish.');
+        $this->assertDatabaseCount('wishes', 975);
+        $this->assertDatabaseHas('wishes', ['wish_id' => '100000', 'uigf_gacha_type' => '301']);
+        $this->getJson("/api/sync-sessions/$token")->assertOk()
+            ->assertJsonPath('summary.five_stars', 975);
+        $token = $this->postJson('/api/sync-sessions')->json('token');
+        $this->postJson("/api/sync-sessions/$token/wishes", $payload)
+            ->assertOk()->assertJsonPath('new_wishes', 0);
+        $this->assertDatabaseCount('wishes', 975);
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

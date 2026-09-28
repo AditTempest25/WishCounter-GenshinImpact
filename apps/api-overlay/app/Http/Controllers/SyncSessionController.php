@@ -128,13 +128,20 @@ class SyncSessionController extends Controller
                     $account->update(['region' => $payload['region']]);
                 }
 
-                foreach ($payload['wishes'] as $record) {
-                    $wish = Wish::firstOrCreate(
-                        [
+                // Serialize writers for this account, including concurrent sync sessions.
+                GenshinAccount::whereKey($account->id)->lockForUpdate()->firstOrFail();
+                $timestamp = now();
+                foreach (array_chunk($payload['wishes'], 250) as $batch) {
+                    $existing = Wish::where('genshin_account_id', $account->id)
+                        ->whereIn('wish_id', array_column($batch, 'id'))->pluck('wish_id')->all();
+                    $seen = array_fill_keys($existing, true);
+                    $rows = [];
+                    foreach ($batch as $record) {
+                        if (isset($seen[$record['id']])) continue;
+                        $seen[$record['id']] = true;
+                        $rows[] = [
                             'genshin_account_id' => $account->id,
                             'wish_id' => $record['id'],
-                        ],
-                        [
                             'gacha_type' => $record['gacha_type'],
                             'uigf_gacha_type' => $record['gacha_type'] === '400' ? '301' : $record['gacha_type'],
                             'item_id' => $record['item_id'] ?? null,
@@ -142,14 +149,14 @@ class SyncSessionController extends Controller
                             'item_type' => $record['item_type'],
                             'rank_type' => (int) $record['rank_type'],
                             'wish_time' => $record['time'],
-                        ]
-                    );
-
-                    if ($wish->wasRecentlyCreated) {
+                            'created_at' => $timestamp,
+                            'updated_at' => $timestamp,
+                        ];
                         $newCount++;
-                        $key = [3 => 'three_stars', 4 => 'four_stars', 5 => 'five_stars'][(int) $wish->rank_type] ?? null;
+                        $key = [3 => 'three_stars', 4 => 'four_stars', 5 => 'five_stars'][(int) $record['rank_type']] ?? null;
                         if ($key) $summary[$key]++;
                     }
+                    if ($rows) Wish::insert($rows);
                 }
             }
 
