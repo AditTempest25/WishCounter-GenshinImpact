@@ -10,6 +10,11 @@ export LOG_CHANNEL=stderr
 export SESSION_DRIVER=database
 export CACHE_STORE=database
 export QUEUE_CONNECTION=sync
+# mod_php requires prefork. Normalize enabled MPMs before starting Apache,
+# including when package updates have enabled an additional default MPM.
+a2dismod -f mpm_event mpm_worker
+a2enmod mpm_prefork
+apache2ctl -t
 php artisan config:cache
 php artisan migrate --force --no-interaction
 php artisan route:cache
