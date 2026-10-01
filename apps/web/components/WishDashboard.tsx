@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { SignedInUser, OwnedAccount } from "./AuthShell";
 import ArchiveTools from "./ArchiveTools";
 import { JourneyCharts, WishPlanner, ShareArchive } from "./JourneyTools";
+import CharacterBuilds from "./CharacterBuilds";
 import ConnectionCheck from "./ConnectionCheck";
 import WishHistory from "./WishHistory";
 import ItemIcon from "./ItemIcon";
@@ -147,6 +148,7 @@ export default function WishDashboard({ user, initialAccounts }: { user: SignedI
         <a href="#recent"><History size={18} /> 5★ timeline</a>
         <a href="#history"><History size={18} /> Wish history</a>
         <a href="#journey"><Orbit size={18} /> Perjalanan wish</a>
+        <a href="#characters"><Swords size={18} /> Character builds</a>
         <a href="#planner"><Star size={18} /> Target wish</a>
         <a href="#backup"><ShieldCheck size={18} /> Backup & restore</a>
         <a href="#guide"><BookOpen size={18} /> Sync guide</a>
@@ -182,6 +184,7 @@ export default function WishDashboard({ user, initialAccounts }: { user: SignedI
         <JourneyCharts stats={stats} />
         <WishPlanner key={`plan:${stats?.uid ?? "none"}`} stats={stats} />
         <WishHistory key={stats?.uid ?? "no-account"} uid={stats?.uid ?? null} revision={stats} />
+        <CharacterBuilds key={knownUid ?? "catalog"} uid={knownUid} privateMode={privateMode} />
         <ArchiveTools uid={stats?.uid ?? null} privateMode={privateMode} disabled={busy || loading} onImported={importedAccount} />
         <ConnectionCheck session={session} />
         <section className="guide" id="guide"><div className="section-heading"><div><p className="eyebrow">READY WHEN YOU ARE</p><h2>A little ritual. A fresh archive.</h2></div><BookOpen size={24} /></div><ol><li><span>01</span><div><h3>Buka Genshin</h3><p>Jalankan game lewat HoYoPlay di PC yang sama.</p></div></li><li><span>02</span><div><h3>Muat Wish History</h3><p>Buka Wish → History sampai riwayat selesai dimuat.</p></div></li><li><span>03</span><div><h3>Sync & return</h3><p>Klik Start Sync dan izinkan Irminsul Sync terbuka.</p></div></li></ol></section>

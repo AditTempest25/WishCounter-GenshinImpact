@@ -1,0 +1,908 @@
+{
+  "furina": {
+    "characterKey": "furina",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "GoldenTroupe"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 130,
+    "objective": "crit_value",
+    "weapon": "splendor_of_tranquil_waters",
+    "weaponAccessible": "festering_desire",
+    "source": "https://keqingmains.com/furina/"
+  },
+  "nahida": {
+    "characterKey": "nahida",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "GildedDreams"
+    },
+    "mains": {
+      "sands": "em",
+      "goblet": "em"
+    },
+    "objective": "crit_value",
+    "weapon": "a_thousand_floating_dreams",
+    "weaponAccessible": "sacrificial_fragments",
+    "source": "https://keqingmains.com/nahida/",
+    "statTargets": {
+      "em": 900
+    }
+  },
+  "navia": {
+    "characterKey": "navia",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NighttimeWhispersInTheEchoingWoods"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 140,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "gest_of_the_mighty_wolf",
+    "weaponAccessible": "serpent_spine",
+    "source": "https://keqingmains.com/navia/"
+  },
+  "neuvillette": {
+    "characterKey": "neuvillette",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "MarechausseeHunter"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "elemental_dmg"
+    },
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "tome_of_the_eternal_flow",
+    "weaponAccessible": "sacrificial_jade",
+    "source": "https://keqingmains.com/neuvillette/"
+  },
+  "hu_tao": {
+    "characterKey": "hu_tao",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "CrimsonWitchOfFlames"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "elemental_dmg"
+    },
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "staff_of_homa",
+    "weaponAccessible": "ballad_of_the_fjords",
+    "source": "https://keqingmains.com/hutao/"
+  },
+  "arataki_itto": {
+    "characterKey": "arataki_itto",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "HuskOfOpulentDreams"
+    },
+    "mains": {
+      "sands": "def_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 130,
+    "objective": "crit_value",
+    "weapon": "redhorn_stonethresher",
+    "weaponAccessible": "serpent_spine",
+    "source": "https://keqingmains.com/itto/"
+  },
+  "raiden_shogun": {
+    "characterKey": "raiden_shogun",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "EmblemOfSeveredFate"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 200,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "engulfing_lightning",
+    "weaponAccessible": "wavebreaker's_fin",
+    "source": "https://keqingmains.com/raiden/"
+  },
+  "xiao": {
+    "characterKey": "xiao",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "VermillionHereafter"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 120,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "primordial_jade_wingedspear",
+    "weaponAccessible": "lithic_spear",
+    "source": "https://keqingmains.com/xiao/",
+    "statTargets": {
+      "crit_rate": 70
+    }
+  },
+  "klee": {
+    "characterKey": "klee",
+    "setRequirement": {
+      "kind": "2+2",
+      "setKeys": [
+        "CrimsonWitchOfFlames",
+        "GladiatorsFinale"
+      ]
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 100,
+    "objective": "crit_value",
+    "weapon": "tome_of_the_eternal_flow",
+    "weaponAccessible": "the_widsith",
+    "source": "https://keqingmains.com/klee/"
+  },
+  "tartaglia": {
+    "characterKey": "tartaglia",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NymphsDream"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 125,
+    "objective": "crit_value",
+    "weapon": "polar_star",
+    "weaponAccessible": "the_viridescent_hunt",
+    "source": "https://keqingmains.com/childe/"
+  },
+  "keqing": {
+    "characterKey": "keqing",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ThunderingFury"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "objective": "crit_value",
+    "weapon": "freedomsworn",
+    "weaponAccessible": "toukabou_shigure",
+    "source": "https://keqingmains.com/keqing/"
+  },
+  "kamisato_ayaka": {
+    "characterKey": "kamisato_ayaka",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "BlizzardStrayer"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 140,
+    "objective": "crit_value",
+    "weapon": "mistsplitter_reforged",
+    "weaponAccessible": "finale_of_the_deep",
+    "source": "https://keqingmains.com/ayaka/"
+  },
+  "yoimiya": {
+    "characterKey": "yoimiya",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ShimenawasReminiscence"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "objective": "crit_value",
+    "weapon": "thundering_pulse",
+    "weaponAccessible": "rust",
+    "source": "https://keqingmains.com/yoimiya/"
+  },
+  "alhaitham": {
+    "characterKey": "alhaitham",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "GildedDreams"
+    },
+    "mains": {
+      "sands": "em",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 105,
+    "objective": "crit_value",
+    "weapon": "light_of_foliar_incision",
+    "weaponAccessible": "wolffang",
+    "source": "https://keqingmains.com/q/alhaitham-quickguide",
+    "statTargets": {
+      "em": 200
+    }
+  },
+  "cyno": {
+    "characterKey": "cyno",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ThunderingFury"
+    },
+    "mains": {
+      "sands": "em",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 140,
+    "objective": "crit_value",
+    "weapon": "staff_of_the_scarlet_sands",
+    "weaponAccessible": "ballad_of_the_fjords",
+    "source": "https://keqingmains.com/q/cyno-quickguide"
+  },
+  "wanderer": {
+    "characterKey": "wanderer",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "DesertPavilionChronicle"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 100,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "tulaytullah's_remembrance",
+    "weaponAccessible": "the_widsith",
+    "source": "https://keqingmains.com/wanderer/"
+  },
+  "ganyu": {
+    "characterKey": "ganyu",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "BlizzardStrayer"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 111,
+    "critRatioTarget": 0.167,
+    "objective": "crit_value",
+    "weapon": "hunter's_path",
+    "weaponAccessible": "hamayumi",
+    "source": "https://keqingmains.com/ganyu/",
+    "statTargets": {
+      "crit_rate": 35,
+      "crit_dmg": 200,
+      "atk": 1800
+    }
+  },
+  "arlecchino": {
+    "characterKey": "arlecchino",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "FragmentOfHarmonicWhimsy"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 150,
+    "objective": "crit_value",
+    "weapon": "crimson_moon's_semblance",
+    "weaponAccessible": "deathmatch",
+    "source": "https://keqingmains.com/q/arlecchino-quickguide"
+  },
+  "xingqiu": {
+    "characterKey": "xingqiu",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "EmblemOfSeveredFate"
+    },
+    "mains": {
+      "sands": "er_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 140,
+    "objective": "crit_value",
+    "weapon": "primordial_jade_cutter",
+    "weaponAccessible": "wolffang",
+    "source": "https://keqingmains.com/xingqiu/"
+  },
+  "yelan": {
+    "characterKey": "yelan",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "EmblemOfSeveredFate"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 160,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "aqua_simulacra",
+    "weaponAccessible": "favonius_warbow",
+    "source": "https://keqingmains.com/yelan/",
+    "statTargets": {
+      "hp": 30000,
+      "crit_rate": 70,
+      "crit_dmg": 140
+    }
+  },
+  "xiangling": {
+    "characterKey": "xiangling",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "EmblemOfSeveredFate"
+    },
+    "mains": {
+      "sands": "er_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 160,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "staff_of_the_scarlet_sands",
+    "weaponAccessible": "wavebreaker's_fin",
+    "source": "https://keqingmains.com/xiangling/"
+  },
+  "bennett": {
+    "characterKey": "bennett",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NoblesseOblige"
+    },
+    "mains": {
+      "sands": "er_pct",
+      "goblet": "hp_pct"
+    },
+    "erTarget": 180,
+    "objective": "hp_pct",
+    "weapon": "mistsplitter_reforged",
+    "weaponAccessible": "the_alley_flash",
+    "source": "https://keqingmains.com/bennett/"
+  },
+  "kaedehara_kazuha": {
+    "characterKey": "kaedehara_kazuha",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ViridescentVenerer"
+    },
+    "mains": {
+      "sands": "em",
+      "goblet": "em"
+    },
+    "erTarget": 190,
+    "objective": "em",
+    "weapon": "freedomsworn",
+    "weaponAccessible": "xiphos'_moonlight",
+    "source": "https://keqingmains.com/kazuha/"
+  },
+  "zhongli": {
+    "characterKey": "zhongli",
+    "setRequirement": {
+      "kind": "2pc",
+      "setKey": "TenacityOfTheMillelith"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "hp_pct",
+      "circlet": "hp_pct"
+    },
+    "objective": "hp_pct",
+    "weaponAccessible": "black_tassel",
+    "source": "https://keqingmains.com/zhongli/"
+  },
+  "kuki_shinobu": {
+    "characterKey": "kuki_shinobu",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "FlowerOfParadiseLost"
+    },
+    "mains": {
+      "sands": "em",
+      "goblet": "em",
+      "circlet": "em"
+    },
+    "erTarget": 135,
+    "objective": "em",
+    "weapon": "freedomsworn",
+    "weaponAccessible": "xiphos'_moonlight",
+    "source": "https://keqingmains.com/q/shinobu-quickguide/"
+  },
+  "faruzan": {
+    "characterKey": "faruzan",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NoblesseOblige"
+    },
+    "mains": {
+      "sands": "er_pct"
+    },
+    "erTarget": 275,
+    "objective": "crit_value",
+    "weapon": "elegy_for_the_end",
+    "weaponAccessible": "favonius_warbow",
+    "source": "https://keqingmains.com/faruzan/"
+  },
+  "sigewinne": {
+    "characterKey": "sigewinne",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "OceanHuedClam"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "hp_pct"
+    },
+    "erTarget": 115,
+    "objective": "hp_pct",
+    "weapon": "silvershower_heartstrings",
+    "weaponAccessible": "recurve_bow",
+    "source": "https://keqingmains.com/q/sigewinne-quickguide",
+    "statTargets": {
+      "hp": 65000
+    }
+  },
+  "kujou_sara": {
+    "characterKey": "kujou_sara",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "EmblemOfSeveredFate"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 160,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "polar_star",
+    "weaponAccessible": "mouun's_moon",
+    "source": "https://keqingmains.com/sara/"
+  },
+  "wriothesley": {
+    "characterKey": "wriothesley",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "MarechausseeHunter"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 100,
+    "objective": "crit_value",
+    "weapon": "cashflow_supervision",
+    "weaponAccessible": "the_widsith",
+    "source": "https://keqingmains.com/q/wriothesley-quickguide/"
+  },
+  "clorinde": {
+    "characterKey": "clorinde",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "FragmentOfHarmonicWhimsy"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 110,
+    "objective": "crit_value",
+    "weapon": "absolution",
+    "weaponAccessible": "the_black_sword",
+    "source": "https://keqingmains.com/q/clorinde-quickguide/"
+  },
+  "albedo": {
+    "characterKey": "albedo",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "HuskOfOpulentDreams"
+    },
+    "mains": {
+      "sands": "def_pct",
+      "goblet": "def_pct"
+    },
+    "erTarget": 140,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "uraku_misugiri",
+    "weaponAccessible": "cinnabar_spindle",
+    "source": "https://keqingmains.com/q/albedo-quickguide/"
+  },
+  "baizhu": {
+    "characterKey": "baizhu",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "DeepwoodMemories"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "hp_pct",
+      "circlet": "hp_pct"
+    },
+    "erTarget": 150,
+    "objective": "hp_pct",
+    "weapon": "jadefall's_splendor",
+    "weaponAccessible": "prototype_amber",
+    "source": "https://keqingmains.com/q/baizhu-quickguide/"
+  },
+  "charlotte": {
+    "characterKey": "charlotte",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NoblesseOblige"
+    },
+    "mains": {
+      "sands": "er_pct",
+      "goblet": "atk_pct",
+      "circlet": "healing"
+    },
+    "erTarget": 200,
+    "objective": "atk_pct",
+    "weapon": "kagura's_verity",
+    "weaponAccessible": "prototype_amber",
+    "source": "https://keqingmains.com/q/charlotte-quickguide/"
+  },
+  "chasca": {
+    "characterKey": "chasca",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ObsidianCodex"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "atk_pct"
+    },
+    "erTarget": 110,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "astral_vulture's_crimson_plumage",
+    "weaponAccessible": "flowerwreathed_feathers",
+    "source": "https://keqingmains.com/q/chasca-quickguide/"
+  },
+  "chevreuse": {
+    "characterKey": "chevreuse",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NoblesseOblige"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "hp_pct",
+      "circlet": "hp_pct"
+    },
+    "erTarget": 100,
+    "objective": "hp_pct",
+    "weapon": "symphonist_of_scents",
+    "weaponAccessible": "favonius_lance",
+    "source": "https://keqingmains.com/q/chevreuse-quickguide/",
+    "statTargets": {
+      "hp": 40000
+    }
+  },
+  "citlali": {
+    "characterKey": "citlali",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ScrollOfTheHeroOfCinderCity"
+    },
+    "mains": {
+      "goblet": "em"
+    },
+    "erTarget": 175,
+    "objective": "em",
+    "weapon": "starcaller's_watch",
+    "weaponAccessible": "thrilling_tales_of_dragon_slayers",
+    "source": "https://keqingmains.com/q/citlali-quickguide/"
+  },
+  "emilie": {
+    "characterKey": "emilie",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "UnfinishedReverie"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 140,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "lumidouce_elegy",
+    "weaponAccessible": "deathmatch",
+    "source": "https://keqingmains.com/q/emilie-quickguide/"
+  },
+  "escoffier": {
+    "characterKey": "escoffier",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "GoldenTroupe"
+    },
+    "mains": {
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 150,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "symphonist_of_scents",
+    "weaponAccessible": "favonius_lance",
+    "source": "https://keqingmains.com/q/escoffier-quickguide/"
+  },
+  "fischl": {
+    "characterKey": "fischl",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "GoldenTroupe"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 130,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "polar_star",
+    "weaponAccessible": "the_stringless",
+    "source": "https://keqingmains.com/fischl/"
+  },
+  "gorou": {
+    "characterKey": "gorou",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ScrollOfTheHeroOfCinderCity"
+    },
+    "mains": {
+      "sands": "er_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 220,
+    "objective": "crit_value",
+    "weapon": "elegy_for_the_end",
+    "weaponAccessible": "favonius_warbow",
+    "source": "https://keqingmains.com/q/gorou-quickguide/"
+  },
+  "kamisato_ayato": {
+    "characterKey": "kamisato_ayato",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "HeartOfDepth"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 140,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "haran_geppaku_futsu",
+    "weaponAccessible": "the_black_sword",
+    "source": "https://keqingmains.com/ayato/"
+  },
+  "kinich": {
+    "characterKey": "kinich",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ObsidianCodex"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 110,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "fang_of_the_mountain_king",
+    "weaponAccessible": "serpent_spine",
+    "source": "https://keqingmains.com/q/kinich-quickguide/"
+  },
+  "mavuika": {
+    "characterKey": "mavuika",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ObsidianCodex"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "a_thousand_blazing_suns",
+    "weaponAccessible": "serpent_spine",
+    "source": "https://keqingmains.com/q/mavuika-quickguide/"
+  },
+  "mualani": {
+    "characterKey": "mualani",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ObsidianCodex"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "elemental_dmg"
+    },
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "surf's_up",
+    "weaponAccessible": "sacrificial_jade",
+    "source": "https://keqingmains.com/q/mualani-quickguide/"
+  },
+  "nilou": {
+    "characterKey": "nilou",
+    "setRequirement": {
+      "kind": "2+2",
+      "setKeys": [
+        "TenacityOfTheMillelith",
+        "VourukashasGlow"
+      ]
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "hp_pct",
+      "circlet": "hp_pct"
+    },
+    "erTarget": 200,
+    "objective": "hp_pct",
+    "weapon": "key_of_khajnisut",
+    "weaponAccessible": "xiphos'_moonlight",
+    "source": "https://keqingmains.com/q/nilou-quickguide/",
+    "statTargets": {
+      "hp": 30000
+    }
+  },
+  "ororon": {
+    "characterKey": "ororon",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ScrollOfTheHeroOfCinderCity"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "erTarget": 140,
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "elegy_for_the_end",
+    "weaponAccessible": "favonius_warbow",
+    "source": "https://keqingmains.com/q/ororon-quickguide/"
+  },
+  "sangonomiya_kokomi": {
+    "characterKey": "sangonomiya_kokomi",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "OceanHuedClam"
+    },
+    "mains": {
+      "sands": "hp_pct",
+      "goblet": "elemental_dmg",
+      "circlet": "healing"
+    },
+    "erTarget": 220,
+    "objective": "hp_pct",
+    "weapon": "everlasting_moonglow",
+    "weaponAccessible": "prototype_amber",
+    "source": "https://keqingmains.com/q/kokomi-quickguide/"
+  },
+  "shenhe": {
+    "characterKey": "shenhe",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NoblesseOblige"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "atk_pct",
+      "circlet": "atk_pct"
+    },
+    "erTarget": 160,
+    "objective": "atk_pct",
+    "weapon": "calamity_queller",
+    "weaponAccessible": "favonius_lance",
+    "source": "https://keqingmains.com/q/shenhe-quickguide/"
+  },
+  "skirk": {
+    "characterKey": "skirk",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "FinaleOfTheDeepGalleries"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "elemental_dmg"
+    },
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "azurelight",
+    "weaponAccessible": "calamity_of_eshu",
+    "source": "https://keqingmains.com/q/skirk-quickguide/"
+  },
+  "xianyun": {
+    "characterKey": "xianyun",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "NoblesseOblige"
+    },
+    "mains": {
+      "sands": "er_pct",
+      "goblet": "atk_pct",
+      "circlet": "atk_pct"
+    },
+    "erTarget": 230,
+    "objective": "atk_pct",
+    "weapon": "crane's_echoing_call",
+    "weaponAccessible": "favonius_codex",
+    "source": "https://keqingmains.com/q/xianyun-quickguide/"
+  },
+  "xilonen": {
+    "characterKey": "xilonen",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "ScrollOfTheHeroOfCinderCity"
+    },
+    "mains": {
+      "sands": "def_pct",
+      "goblet": "def_pct",
+      "circlet": "def_pct"
+    },
+    "erTarget": 150,
+    "objective": "def_pct",
+    "weapon": "peak_patrol_song",
+    "weaponAccessible": "favonius_sword",
+    "source": "https://keqingmains.com/q/xilonen-quickguide/"
+  },
+  "yae_miko": {
+    "characterKey": "yae_miko",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "DisenchantmentInDeepShadow"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "atk_pct"
+    },
+    "critRatioTarget": 0.333,
+    "objective": "crit_value",
+    "weapon": "kagura's_verity",
+    "source": "https://keqingmains.com/q/yae-quickguide/"
+  },
+  "odette": {
+    "characterKey": "odette",
+    "setRequirement": {
+      "kind": "4pc",
+      "setKey": "HeartOfTheFurnace"
+    },
+    "mains": {
+      "sands": "atk_pct",
+      "goblet": "atk_pct",
+      "circlet": "crit"
+    },
+    "objective": "crit_value",
+    "critRatioTarget": 0.333,
+    "weapon": "whitelake_frostfeather",
+    "weaponAccessible": "finale_of_the_deep",
+    "source": "https://keqingmains.com/q/odette-quickguide/",
+    "note": "ATK 3.000 saat buff aktif adalah batas bonus pasif, bukan minimum tanpa buff. Finale of the Deep terbantu healer untuk menghapus Bond of Life. Aquila Favonia dan Primordial Jade Cutter juga alternatif. Prioritaskan CRIT; kebutuhan ER mengikuti rotasi dan konstelasi.",
+    "alternatives": [
+      "aquila_favonia",
+      "primordial_jade_cutter"
+    ],
+    "patch": "7.0"
+  }
+}

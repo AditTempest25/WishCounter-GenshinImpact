@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum', 'throttle:180,1,authenticated:'])->group(func
     Route::post('/archives/import', [ArchiveController::class, 'import'])->middleware('throttle:10,1,import:');
     Route::post('/sync-sessions', [SyncSessionController::class, 'store'])->middleware('throttle:10,1,create-sync:');
     Route::get('/sync-sessions/{token}', [SyncSessionController::class, 'show']);
+    Route::get('/accounts/{uid}/builds', [\App\Http\Controllers\CharacterBuildController::class, 'show'])->middleware('throttle:10,1,builds:');
     Route::get('/accounts/{uid}/stats', [AccountStatsController::class, 'show']);
     Route::get('/accounts/{uid}/wishes', [WishHistoryController::class, 'index']);
 });
