@@ -101,6 +101,34 @@ class HoyolabBuildSyncTest extends TestCase
         $this->assertNull(DB::table('genshin_accounts')->value('build_snapshot'));
     }
 
+    public function test_validation_preserves_weapon_details_and_all_five_artifact_slots(): void
+    {
+        $token = $this->begin();
+        $data = $this->fixture();
+        $data['characters'][0]['weapon'] = ['id' => 13509, 'name' => 'Engulfing Lightning', 'level' => 90,
+            'rarity' => 5, 'affix_level' => 2, 'icon' => 'UI_EquipIcon_Pole_Narukami',
+            'main_property' => ['property_type' => 1, 'final' => '608'],
+            'sub_property' => ['property_type' => 2, 'final' => '55.1%']];
+        $data['characters'][0]['relics'] = array_map(fn ($pos) => [
+            'id' => 100 + $pos, 'name' => 'Artifact '.$pos, 'pos' => $pos, 'level' => 20, 'rarity' => 5,
+            'icon' => 'UI_RelicIcon_15020_'.$pos, 'set' => ['name' => 'Emblem of Severed Fate'],
+            'main_property' => ['property_type' => 1, 'value' => '4780'],
+            'sub_property_list' => [['property_type' => 2, 'value' => '16.2%']],
+        ], range(1, 5));
+        $this->postJson('/api/build-sync-sessions/'.$token.'/builds', $data)->assertOk();
+        $response = $this->getJson('/api/accounts/800001234/hoyolab-builds')->assertOk()
+            ->assertJsonPath('snapshot.characters.0.weapon.id', 13509)
+            ->assertJsonPath('snapshot.characters.0.weapon.level', 90)
+            ->assertJsonPath('snapshot.characters.0.weapon.affix_level', 2)
+            ->assertJsonPath('snapshot.characters.0.weapon.main_property.final', '608')
+            ->assertJsonPath('snapshot.characters.0.weapon.sub_property.final', '55.1%');
+        foreach (range(0, 4) as $index) $response
+            ->assertJsonPath("snapshot.characters.0.relics.$index.pos", $index + 1)
+            ->assertJsonPath("snapshot.characters.0.relics.$index.level", 20)
+            ->assertJsonPath("snapshot.characters.0.relics.$index.main_property.value", '4780')
+            ->assertJsonPath("snapshot.characters.0.relics.$index.icon", 'UI_RelicIcon_15020_'.($index + 1));
+    }
+
     public function test_failed_and_older_sessions_keep_the_new_snapshot(): void
     {
         $older = $this->begin();
