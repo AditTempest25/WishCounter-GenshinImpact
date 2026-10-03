@@ -5,7 +5,7 @@ Sync HoYoLAB is separate from wish sync. It reads the linked global Genshin acco
 ## Release order
 
 1. Push the source changes. Railway must deploy the new controller, routes and migration; its existing startup migration command creates the snapshot columns and build session table. Vercel must deploy the updated frontend and proxy allowlist.
-2. Upload `dist/IrminsulSync-Windows.zip` as a GitHub release asset under tag `companion-v1.1.1`. Package configuration targets the production Railway API. The ordinary wish-sync download remains pinned to v1.0 until the new release has been uploaded and checked.
+2. Upload `dist/IrminsulSync-Windows.zip` as a GitHub release asset under tag `companion-v1.1.1`. Package configuration targets the production Railway API. The main website download points to the companion-v1.1.1 release asset, which supports both wish and HoYoLAB build sync.
 3. Extract the whole v1.1.1 ZIP and run `Install.cmd`, replacing the old companion. Microsoft Edge WebView2 Runtime is needed to show the login window. The ZIP includes the self-contained .NET app.
 4. Log in to Irminsul, select an account with a synced/imported wish archive, and open Character builds. Click **Sync HoYoLAB**, allow the companion, log in directly to HoYoLAB, and click **Sync this account**. The HoYoLAB account must own that selected UID. Verify the roster, weapon, artifacts and stat totals against Battle Chronicle, then refresh the website to check the saved snapshot.
 

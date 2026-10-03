@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       {
         source: "/downloads/IrminsulSync-Windows.zip",
         destination:
-          "https://github.com/AditTempest25/WishCounter-GenshinImpact/releases/download/companion-v1.0.0/IrminsulSync-Windows.zip",
+          "https://github.com/AditTempest25/WishCounter-GenshinImpact/releases/download/companion-v1.1.1/IrminsulSync-Windows.zip",
         permanent: false,
       },
     ];
