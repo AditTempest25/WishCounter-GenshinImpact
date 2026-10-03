@@ -89,6 +89,12 @@ function FiveStarTimeline({ uid, revision, onSelect }: { uid: string | null; rev
   </section>;
 }
 
+export function WishTimeline({ uid, revision }: { uid: string | null; revision: object | null }) {
+  const [selected, setSelected] = useState<WishRecord | null>(null);
+  return <><FiveStarTimeline uid={uid} revision={revision} onSelect={setSelected} />
+    {selected && uid && <ItemDetails key={selected.id} uid={uid} wish={selected} revision={revision} onClose={() => setSelected(null)} />}</>;
+}
+
 export default function WishHistory({ uid, revision }: { uid: string | null; revision: object | null }) {
   const [query, setQuery] = useState<{ page: number; filters: HistoryFilters }>({ page: 1, filters: { per_page: 20 } });
   const [selected, setSelected] = useState<WishRecord | null>(null);
@@ -105,7 +111,6 @@ export default function WishHistory({ uid, revision }: { uid: string | null; rev
   }
   function resetFilters() { form.current?.reset(); setValidation(null); setQuery({ page: 1, filters: { per_page: 20 } }); }
   return <>
-    <FiveStarTimeline uid={uid} revision={revision} onSelect={setSelected} />
     <section id="history" className="content-section"><div className="section-heading"><div><p className="eyebrow">EVERY PULL HAS A PLACE</p><h2>Wish history</h2></div><span className="subtle">Terbaru lebih dulu · klik nama untuk detail</span></div>
       <form className="archive-filters" ref={form} onSubmit={applyFilters}>
         <label className="search-field">Cari nama<input name="search" placeholder="Ineffa, Favonius…" maxLength={100} type="search" /></label>

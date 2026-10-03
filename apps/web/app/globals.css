@@ -123,6 +123,26 @@ p {
   color:#d7e9d8
 }
 
+.sidebar nav a[aria-current="page"] {
+  background:#243b2c;
+  color:var(--gold);
+  box-shadow:inset 3px 0 var(--gold)
+}
+
+.page-heading .subtle { margin-top:12px; max-width:650px }
+.overview-pity-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:24px }
+.overview-pity-card { display:grid; gap:12px; padding:25px; border:1px solid var(--line); border-radius:12px; background:#14261b }
+.overview-pity-card strong { font-size:36px; color:var(--gold) }
+.overview-pity-card small { font-size:16px; color:var(--muted); font-weight:400 }
+.overview-shortcuts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:24px }
+.overview-shortcut { padding:24px; border:1px solid var(--line); border-radius:12px }
+.overview-shortcut strong { display:flex; justify-content:space-between; gap:12px; color:var(--jade); margin-bottom:12px }
+.overview-shortcut p { color:var(--muted) }
+.overview-pity-card:hover,.overview-shortcut:hover { border-color:var(--jade); background:#1a3022 }
+@media(max-width:760px) {
+  .overview-pity-grid,.overview-shortcuts { grid-template-columns:1fr }
+}
+
 .privacy {
   margin-top:auto;
   padding:55px 12px 22px;

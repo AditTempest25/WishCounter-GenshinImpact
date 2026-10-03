@@ -1,12 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { usePathname, useRouter } from "next/navigation";
+import { dashboardPages, legacyDashboardHashes } from "../lib/dashboard-pages";
 import type { SignedInUser, OwnedAccount } from "./AuthShell";
 import ArchiveTools from "./ArchiveTools";
 import { JourneyCharts, WishPlanner, ShareArchive } from "./JourneyTools";
-import CharacterBuilds from "./CharacterBuilds";
+const CharacterBuilds = dynamic(() => import("./CharacterBuilds"), { loading: () => <p role="status">Memuat character builds…</p> });
 import ConnectionCheck from "./ConnectionCheck";
-import WishHistory from "./WishHistory";
+const WishHistory = dynamic(() => import("./WishHistory"), { loading: () => <p role="status">Memuat history…</p> });
+const WishTimeline = dynamic(() => import("./WishHistory").then(module => module.WishTimeline), { loading: () => <p role="status">Memuat timeline…</p> });
 import ItemIcon from "./ItemIcon";
 import WishInsights, { SyncSummaryLine } from "./WishInsights";
 import { useEffect, useRef, useState } from "react";
@@ -28,6 +33,27 @@ function errorText(error: unknown) {
 }
 
 export default function WishDashboard({ user, initialAccounts }: { user: SignedInUser; initialAccounts: OwnedAccount[] }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const page = dashboardPages.find(page => pathname === `/${page.slug}`) ?? dashboardPages[0];
+  const overview = page.slug === "";
+  const navIcons = [LayoutDashboard, Sparkles, Layers3, History, History, Orbit, Swords, Star, ShieldCheck, BookOpen];
+
+  useEffect(() => {
+    const migrateHash = () => {
+      const destination = legacyDashboardHashes[window.location.hash.slice(1)];
+      if (destination) router.replace(destination);
+    };
+    migrateHash();
+    window.addEventListener("hashchange", migrateHash);
+    return () => window.removeEventListener("hashchange", migrateHash);
+  }, [router]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+    document.getElementById("main")?.focus({ preventScroll: true });
+  }, [pathname]);
+
   const [accounts, setAccounts] = useState(initialAccounts);
   const accountStorageKey = `irminsul:lastUid:${user.id}`;
   const [session, setSession] = useState<SyncSession | null>(null);
@@ -139,56 +165,50 @@ export default function WishDashboard({ user, initialAccounts }: { user: SignedI
   return <div className="app-shell">
     <a href="#main" className="skip-link">Lewati navigasi</a>
     <aside className="sidebar">
-      <a href="#overview" className="brand"><span className="brand-mark"><Leaf size={25} /></span><span>Irminsul<span className="brand-sub">WISH ARCHIVE</span></span></a>
+      <Link href="/" className="brand"><span className="brand-mark"><Leaf size={25} /></span><span>Irminsul<span className="brand-sub">WISH ARCHIVE</span></span></Link>
       <div className="nav-label">YOUR JOURNEY</div>
       <nav aria-label="Navigasi utama">
-        <a href="#overview"><LayoutDashboard size={18} /> Overview</a>
-        <a href="#insights"><Sparkles size={18} /> Wish insights</a>
-        <a href="#banners"><Layers3 size={18} /> Banner pity</a>
-        <a href="#recent"><History size={18} /> 5★ timeline</a>
-        <a href="#history"><History size={18} /> Wish history</a>
-        <a href="#journey"><Orbit size={18} /> Perjalanan wish</a>
-        <a href="#characters"><Swords size={18} /> Character builds</a>
-        <a href="#planner"><Star size={18} /> Target wish</a>
-        <a href="#backup"><ShieldCheck size={18} /> Backup & restore</a>
-        <a href="#guide"><BookOpen size={18} /> Sync guide</a>
+        {dashboardPages.map((item, index) => { const Icon = navIcons[index]; return <Link key={item.slug} href={`/${item.slug}`} aria-current={page.slug === item.slug ? "page" : undefined}><Icon size={18} />{item.label}</Link>; })}
       </nav>
       <div className="privacy"><ShieldCheck size={22} /><strong>Your wishes. Your archive.</strong><p>Authkey tetap di PC kamu. Hanya riwayat wish yang dikirim ke API.</p><span>WINDOWS COMPANION</span></div>
       <div className="sidebar-footer"><Leaf size={13} /> Rooted in your journey</div>
     </aside>
     <div className="workspace" id="overview">
-      <header className="topbar"><span>My archive <ChevronRight size={13} /> <b>Overview</b></span><span className="game-label"><Sparkles size={13} /> GENSHIN IMPACT</span></header>
-      <main id="main">
-        <div className="page-heading"><div><p className="eyebrow">A LITTLE LUCK. A LOT OF MEMORIES.</p><h1>Your wish archive</h1></div><span className="edition">TEYVAT COLLECTION <span>01</span></span></div>
-        <section className="hero" aria-label="Irminsul wish archive">
+      <header className="topbar"><span>My archive <ChevronRight size={13} /> <b>{page.label}</b></span><span className="game-label"><Sparkles size={13} /> GENSHIN IMPACT</span></header>
+      <main id="main" tabIndex={-1}>
+        <div className="page-heading"><div><p className="eyebrow">A LITTLE LUCK. A LOT OF MEMORIES.</p><h1>{overview ? "Your wish archive" : page.label}</h1>{!overview && <p className="subtle">{page.description}</p>}</div><span className="edition">TEYVAT COLLECTION <span>01</span></span></div>
+        {overview && <section className="hero" aria-label="Irminsul wish archive">
           <Image src="/images/irminsul-hero.png" alt="" fill preload sizes="(max-width: 760px) 100vw, (max-width: 1300px) 80vw, 1100px" />
-          <div className="hero-shade" /><div className="hero-content"><p className="eyebrow"><Sparkles size={13} /> EVERY WISH, REMEMBERED</p><h2>Let your wishes<br /><em>take root.</em></h2><p>Setiap bintang punya cerita.<br />Simpan perjalanan wish kamu di satu tempat.</p><a href="#banners">Explore your wishes <ArrowUpRight size={17} /></a></div><span className="hero-caption">THE IRMINSUL ARCHIVE</span>
-        </section>
+          <div className="hero-shade" /><div className="hero-content"><p className="eyebrow"><Sparkles size={13} /> EVERY WISH, REMEMBERED</p><h2>Let your wishes<br /><em>take root.</em></h2><p>Setiap bintang punya cerita.<br />Simpan perjalanan wish kamu di satu tempat.</p><Link href="/banners">Explore your wishes <ArrowUpRight size={17} /></Link></div><span className="hero-caption">THE IRMINSUL ARCHIVE</span>
+        </section>}
         <section className="account-strip" aria-label="Akun dan sinkronisasi">
           <div className="account-identity"><span className="avatar"><Leaf size={24} /></span><div><span className="label">{stats ? "CONNECTED ACCOUNT" : "YOUR ACCOUNT"}</span><div className="account-uid">{loading ? "Memuat akun…" : stats ? `UID ${privateMode ? "•••••••••" : stats.uid}` : "Mulai perjalananmu"}{stats && !privateMode && <button className="icon-button" aria-label={copied ? "UID tersalin" : "Salin UID"} onClick={copyUid}>{copied ? <Check size={15} /> : <Copy size={15} />}</button>}</div><span className="subtle">{stats ? stats.region || "Genshin Impact" : "Hubungkan riwayat wish pertamamu"}</span></div></div>
           <div className="last-sync"><span className="label"><Clock3 size={12} /> LAST SYNC</span><span>{syncDate}</span></div>
           <button className="primary" onClick={startSync} disabled={busy || loading}><RefreshCw size={16} className={busy ? "spin" : ""} />{busy ? "Syncing…" : "Start Sync"}</button>
         </section>
-        <div className="privacy-controls">{accounts.length > 1 && <label>Akun Genshin<select aria-label="Pilih akun Genshin" value={knownUid ?? ""} disabled={busy || loading} onChange={e => void selectAccount(e.target.value)}>{accounts.map((account, index) => <option key={account.uid} value={account.uid}>{privateMode ? `Akun ${index + 1}` : account.uid}</option>)}</select></label>}<label><input type="checkbox" checked={privateMode} onChange={e => { setPrivateMode(e.target.checked); writeLocal("irminsul:privacy:v1", e.target.checked ? "on" : "off"); }} /> Sembunyikan UID</label><ShareArchive stats={stats} privateMode={privateMode} /></div>
+        <div className="privacy-controls">{accounts.length > 1 && <label>Akun Genshin<select aria-label="Pilih akun Genshin" value={knownUid ?? ""} disabled={busy || loading} onChange={e => void selectAccount(e.target.value)}>{accounts.map((account, index) => <option key={account.uid} value={account.uid}>{privateMode ? `Akun ${index + 1}` : account.uid}</option>)}</select></label>}<label><input type="checkbox" checked={privateMode} onChange={e => { setPrivateMode(e.target.checked); writeLocal("irminsul:privacy:v1", e.target.checked ? "on" : "off"); }} /> Sembunyikan UID</label>{overview && <ShareArchive stats={stats} privateMode={privateMode} />}</div>
         {(busy || session) && <section className={`sync-panel ${session?.status === "completed" ? "success" : ""}`} aria-live="polite"><div><strong>{session?.status === "completed" ? "Arsip berhasil diperbarui" : session?.status === "failed" ? "Sync belum berhasil" : !session ? "Menyiapkan sesi sync…" : connectionIssue ? "Koneksi API terputus. Mencoba lagi…" : session?.status === "syncing" ? "Companion terhubung" : "Menunggu Irminsul Sync terbuka"}</strong><p>{session?.status === "completed" ? `${value(session.new_wishes)} wish baru ditambahkan.` : session?.status === "failed" ? session.message || "Coba mulai sync kembali." : session?.status === "syncing" ? session.message : launchHint ? "Companion belum merespons. Coba tautan Buka Irminsul Sync. Jika tetap tidak muncul, buka bantuan koneksi di bawah." : "Buka Wish → History di Genshin, lalu izinkan Chrome/Edge membuka companion."}</p>{session?.status === "completed" && session.summary && <SyncSummaryLine summary={session.summary} />}</div>{busy && <div className="sync-actions">{session?.protocol_uri && <a className="secondary" href={session.protocol_uri}>Buka Irminsul Sync <ArrowUpRight size={14} /></a>}<button className="text-button" onClick={cancelSync}>Batalkan</button></div>}</section>}
         {error && <div className="error" role="alert"><span>{error}</span>{knownUid && <button className="secondary" disabled={loading || busy} onClick={refreshAccount}>Muat ulang akun</button>}</div>}
-        <section className="summary-grid" aria-label="Ringkasan wish" aria-busy={loading}>
+        {overview && <section className="summary-grid" aria-label="Ringkasan wish" aria-busy={loading}>
           {[{ name: "Total wishes", number: stats?.total_wishes, icon: Star, detail: "Seluruh arsip" }, ...banners.slice(0, 3).map(b => ({ name: b.name, number: stats?.banners[b.id]?.total_wishes, icon: b.icon, detail: "Stored wishes" }))].map(metric => <article className="summary" key={metric.name}><div><span>{metric.name}</span><metric.icon size={17} /></div><strong>{value(metric.number)}</strong><span className="subtle">{metric.detail}</span></article>)}
-        </section>
-        <WishInsights stats={stats} />
-        <section id="banners" className="content-section"><div className="section-heading"><div><p className="eyebrow">THE NEXT FALLING STAR</p><h2>Banner overview</h2></div><span className="subtle">Pity dari riwayat tersimpan</span></div>
+        </section>}
+        {overview && <section className="overview-pity-grid" aria-label="Ringkasan pity event">{banners.slice(0, 2).map(banner => { const data = stats?.banners[banner.id]; const status = stats?.next_guarantee?.[banner.id]; return <Link href="/banners" className="overview-pity-card" key={banner.id}><span className="label">{banner.name}</span><strong>{value(data?.current_pity)}<small> / {data?.hard_pity ?? banner.cap}</small></strong><span>{status === "guaranteed" ? "Guaranteed rate-up" : status === "not_guaranteed" ? banner.id === "301" ? "50/50 · Belum guaranteed" : "75/25 · Belum guaranteed" : "Status belum diketahui"}</span><span className="subtle">Lihat detail banner →</span></Link>; })}</section>}
+        {overview && <section className="overview-shortcuts" aria-label="Jelajahi arsip">{dashboardPages.filter(item => ["history", "characters", "planner"].includes(item.slug)).map(item => <Link className="overview-shortcut" key={item.slug} href={`/${item.slug}`}><strong>{item.label}<ArrowUpRight size={17} /></strong><p>{item.description}</p></Link>)}</section>}
+        {page.slug === "insights" && <WishInsights stats={stats} />}
+        {page.slug === "banners" && <section id="banners" className="content-section"><div className="section-heading"><div><p className="eyebrow">THE NEXT FALLING STAR</p><h2>Banner overview</h2></div><span className="subtle">Pity dari riwayat tersimpan</span></div>
           <div className="filters" role="group" aria-label="Filter banner">{[{ id: "all", name: "All banners" }, ...banners].map(b => <button key={b.id} aria-pressed={filter === b.id} onClick={() => setFilter(b.id)}>{b.name}</button>)}</div>
           <div className="banner-grid">{banners.filter(b => filter === "all" || b.id === filter).map(meta => { const data = stats?.banners[meta.id]; const cap = data?.hard_pity ?? meta.cap; return <article className={`banner-card ${meta.theme}`} key={meta.id}><div className="banner-heading"><span className="banner-icon"><meta.icon size={22} /></span><div><h3>{meta.name}</h3><p>{meta.subtitle}</p></div><span className="rarity">5 <Star size={12} fill="currentColor" /></span></div><div className="pity-row"><div><span className="label">CURRENT PITY</span><strong>{value(data?.current_pity)}<small> / {cap}</small></strong></div><span className="pity-label">{data ? `${Math.max(0, cap - data.current_pity)} hingga hard pity` : "Menunggu riwayat"}</span></div><div className="meter" role="progressbar" aria-label={`${meta.name} pity`} aria-valuenow={data?.current_pity} aria-valuemin={0} aria-valuemax={cap} aria-valuetext={data ? `${data.current_pity} dari ${cap}` : "Belum ada data"}><div style={{ width: `${Math.min(100, (data?.current_pity ?? 0) / cap * 100)}%` }} /></div><div className="meter-labels"><span>0</span><span>{cap} hard pity</span></div><div className="last-pull">{data?.last_5_star ? <ItemIcon itemId={data.last_5_star.item_id} name={data.last_5_star.name} itemType={data.last_5_star.item_type} /> : <Star size={16} />}<div><span className="label">LAST 5-STAR</span><strong>{data?.last_5_star?.name ?? "Belum ada di arsip"}</strong></div><span>{value(data?.total_wishes)}<small> wishes</small></span></div><p className="banner-note">{meta.note}</p>{["301", "302"].includes(meta.id) && <div className={`guarantee-status guarantee-${stats?.next_guarantee?.[meta.id] ?? "unknown"}`}><span className="label">5★ BERIKUTNYA</span><strong>{stats?.next_guarantee?.[meta.id] === "guaranteed" ? "Guaranteed rate-up" : stats?.next_guarantee?.[meta.id] === "not_guaranteed" ? meta.id === "301" ? "50/50 · Belum guaranteed" : "75/25 · Belum guaranteed" : "Belum diketahui"}</strong><p>{meta.id === "301" ? "Dari arsip tersimpan; Capturing Radiance tidak dihitung." : "Untuk salah satu senjata rate-up, bukan pilihan Epitomized Path."}</p><details><summary>Kenapa statusnya begitu?</summary><p>Hasil 5★ terakhir: {data?.last_5_star?.name ?? "belum tercatat"}{data?.last_5_star ? ` (${data.last_5_star.time})` : ""}. Hasil dibandingkan dengan daftar featured pada tanggal wish. Rate off membuat 5★ berikutnya guaranteed rate-up; rate on mengakhiri guaranteed sebelumnya.</p><p>Jika tanggal berada di pergantian banner, metadata belum tersedia, atau item tidak bisa dikenali, status ditampilkan belum diketahui. Riwayat yang hilang setelah hasil terakhir juga dapat mengubah kondisi sebenarnya.</p></details></div>}</article>; })}</div>
           <p className="data-note">Riwayat yang tidak lengkap bisa membuat hitungan pity lebih rendah dari kondisi di game.</p>
-        </section>
-        <JourneyCharts stats={stats} />
-        <WishPlanner key={`plan:${stats?.uid ?? "none"}`} stats={stats} />
-        <WishHistory key={stats?.uid ?? "no-account"} uid={stats?.uid ?? null} revision={stats} />
-        <CharacterBuilds key={knownUid ?? "catalog"} uid={knownUid} privateMode={privateMode} />
-        <ArchiveTools uid={stats?.uid ?? null} privateMode={privateMode} disabled={busy || loading} onImported={importedAccount} />
-        <ConnectionCheck session={session} />
-        <section className="guide" id="guide"><div className="section-heading"><div><p className="eyebrow">READY WHEN YOU ARE</p><h2>A little ritual. A fresh archive.</h2></div><BookOpen size={24} /></div><ol><li><span>01</span><div><h3>Buka Genshin</h3><p>Jalankan game lewat HoYoPlay di PC yang sama.</p></div></li><li><span>02</span><div><h3>Muat Wish History</h3><p>Buka Wish → History sampai riwayat selesai dimuat.</p></div></li><li><span>03</span><div><h3>Sync & return</h3><p>Klik Start Sync dan izinkan Irminsul Sync terbuka.</p></div></li></ol></section>
-        <footer><span><Leaf size={14} /> Irminsul Wish</span><p>Fan-made wish archive · Tidak berafiliasi dengan HoYoverse.</p><a href="#overview">Back to top ↑</a></footer>
+        </section>}
+        {page.slug === "journey" && <JourneyCharts stats={stats} />}
+        {page.slug === "planner" && <WishPlanner key={`plan:${stats?.uid ?? "none"}`} stats={stats} />}
+        {page.slug === "timeline" && <WishTimeline key={stats?.uid ?? "no-account"} uid={stats?.uid ?? null} revision={stats} />}
+        {page.slug === "history" && <WishHistory key={stats?.uid ?? "no-account"} uid={stats?.uid ?? null} revision={stats} />}
+        {page.slug === "characters" && <CharacterBuilds key={knownUid ?? "catalog"} uid={knownUid} privateMode={privateMode} />}
+        {page.slug === "backup" && <ArchiveTools uid={stats?.uid ?? null} privateMode={privateMode} disabled={busy || loading} onImported={importedAccount} />}
+        {(page.slug === "guide" || launchHint || connectionIssue) && <ConnectionCheck session={session} />}
+        {page.slug === "guide" && <section className="guide" id="guide"><div className="section-heading"><div><p className="eyebrow">READY WHEN YOU ARE</p><h2>A little ritual. A fresh archive.</h2></div><BookOpen size={24} /></div><ol><li><span>01</span><div><h3>Buka Genshin</h3><p>Jalankan game lewat HoYoPlay di PC yang sama.</p></div></li><li><span>02</span><div><h3>Muat Wish History</h3><p>Buka Wish → History sampai riwayat selesai dimuat.</p></div></li><li><span>03</span><div><h3>Sync & return</h3><p>Klik Start Sync dan izinkan Irminsul Sync terbuka.</p></div></li></ol></section>}
+        <footer><span><Leaf size={14} /> Irminsul Wish</span><p>Fan-made wish archive · Tidak berafiliasi dengan HoYoverse.</p><a href="#main">Kembali ke atas ↑</a></footer>
       </main>
     </div>
   </div>;
