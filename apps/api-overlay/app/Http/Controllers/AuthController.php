@@ -74,6 +74,8 @@ class AuthController extends Controller
     {
         SyncSession::where('user_id', $userId)->whereIn('status', ['waiting', 'syncing'])
             ->update(['status' => 'failed', 'message' => 'Sesi login berakhir. Login dan mulai sync baru.']);
+        DB::table('build_sync_sessions')->whereIn('genshin_account_id', GenshinAccount::where('user_id', $userId)->select('id'))
+            ->where('status', 'waiting')->update(['status' => 'failed', 'message' => 'Sesi login berakhir. Login dan mulai sync baru.', 'updated_at' => now()]);
     }
 
     private function passwordRules(): array

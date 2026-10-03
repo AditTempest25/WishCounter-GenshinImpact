@@ -11,8 +11,8 @@ async function proxy(request: NextRequest, context: Context) {
   const path = (await context.params).path.join("/");
   const method = request.method;
   const permitted = method === "GET"
-    ? /^(health|auth\/me|accounts\/[0-9]{6,20}\/(stats|wishes|archive|builds)|sync-sessions\/[A-Za-z0-9]{64})$/.test(path)
-    : /^(auth\/(login|register|logout|password)|archives\/import|sync-sessions)$/.test(path);
+    ? /^(health|auth\/me|accounts\/[0-9]{6,20}\/(stats|wishes|archive|builds|hoyolab-builds)|(?:sync-sessions|build-sync-sessions)\/[A-Za-z0-9]{64})$/.test(path)
+    : /^(auth\/(login|register|logout|password)|archives\/import|sync-sessions|accounts\/[0-9]{6,20}\/build-sync|build-sync-sessions\/[A-Za-z0-9]{64}\/cancel)$/.test(path);
   if (!permitted) return NextResponse.json({ message: "Not found." }, { status: 404 });
   const origin = process.env.APP_ORIGIN ?? request.nextUrl.origin;
   if (method !== "GET" && (request.headers.get("origin") !== origin || request.headers.get("sec-fetch-site") === "cross-site" || !request.headers.get("content-type")?.includes("application/json"))) {

@@ -24,7 +24,7 @@ internal static class Program
     {
         string? sessionToken = null;
         Console.Title = "Irminsul Sync";
-        Console.WriteLine("Irminsul Sync POC v0.1");
+        Console.WriteLine("Irminsul Sync v1.1.0");
         Console.WriteLine("-----------------------");
 
         try
@@ -34,6 +34,14 @@ internal static class Program
             {
                 Console.Error.WriteLine("Missing sync session. Launch this app from the Irminsul Wish web dashboard.");
                 return 2;
+            }
+
+            if (args.Any(arg => arg.StartsWith("irminsul://builds?", StringComparison.OrdinalIgnoreCase)))
+            {
+                await HoyolabBuildSync.RunAsync(GetApiBase(), sessionToken);
+                Console.WriteLine("Build sync completed. Return to Character builds.");
+                await Task.Delay(1200);
+                return 0;
             }
 
             await ReportProgress(sessionToken, "connected");
@@ -98,7 +106,7 @@ internal static class Program
         }
         catch (Exception ex)
         {
-            if (sessionToken is not null) await ReportProgress(sessionToken, "failed");
+            if (sessionToken is not null && !args.Any(arg => arg.StartsWith("irminsul://builds?", StringComparison.OrdinalIgnoreCase))) await ReportProgress(sessionToken, "failed");
             Console.Error.WriteLine();
             Console.Error.WriteLine($"Sync failed: {ex.Message}");
             KeepErrorVisible();
