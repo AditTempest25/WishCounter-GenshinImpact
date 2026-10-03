@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ChevronLeft, ChevronRight, History, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, History, Search, X } from "lucide-react";
 import { loadWishPage, type HistoryFilters, type WishHistoryPage, type WishRecord } from "../lib/api";
 import ItemIcon from "./ItemIcon";
 import { bannerNames } from "./WishInsights";
@@ -34,11 +34,23 @@ function RateBadge({ wish }: { wish: WishRecord }) {
 }
 
 function Pagination({ data, onPage, label }: { data: WishHistoryPage; onPage: (page: number) => void; label: string }) {
-  return <div className="history-pagination"><span>{data.total ? (data.current_page - 1) * data.per_page + 1 : 0}–{Math.min(data.current_page * data.per_page, data.total)} dari {data.total.toLocaleString("id-ID")}</span><div>
-    <button className="secondary" aria-label={`${label}: halaman sebelumnya`} disabled={data.current_page <= 1} onClick={() => onPage(data.current_page - 1)}><ChevronLeft size={16} /></button>
-    <span aria-live="polite">Hal. {data.current_page} / {data.last_page}</span>
-    <button className="secondary" aria-label={`${label}: halaman berikutnya`} disabled={data.current_page >= data.last_page} onClick={() => onPage(data.current_page + 1)}><ChevronRight size={16} /></button>
-  </div></div>;
+  const current = data.current_page;
+  const last = Math.max(1, data.last_page);
+  const start = Math.max(1, Math.min(current - 2, last - 4));
+  const end = Math.min(last, start + 4);
+  const pages = [...new Set([1, ...Array.from({ length: end - start + 1 }, (_, index) => start + index), last])];
+  return <div className="history-pagination"><div className="pagination-summary"><span>{data.total ? (current - 1) * data.per_page + 1 : 0}–{Math.min(current * data.per_page, data.total)} dari {data.total.toLocaleString("id-ID")}</span><span aria-live="polite">Hal. {current} / {last}</span></div>
+    <nav aria-label={`${label}: navigasi halaman`}>
+      <button type="button" className="secondary" title="Halaman pertama" aria-label={`${label}: halaman pertama`} disabled={current <= 1} onClick={() => onPage(1)}><ChevronsLeft size={16} /></button>
+      <button type="button" className="secondary" title="Halaman sebelumnya" aria-label={`${label}: halaman sebelumnya`} disabled={current <= 1} onClick={() => onPage(current - 1)}><ChevronLeft size={16} /></button>
+      {pages.map((page, index) => <span className="pagination-number" key={page}>
+        {index > 0 && page - pages[index - 1] > 1 && <span className="pagination-gap" aria-hidden="true">…</span>}
+        <button type="button" className="secondary" aria-label={`${label}: halaman ${page}`} aria-current={current === page ? "page" : undefined} onClick={() => { if (page !== current) onPage(page); }}>{page}</button>
+      </span>)}
+      <button type="button" className="secondary" title="Halaman berikutnya" aria-label={`${label}: halaman berikutnya`} disabled={current >= last} onClick={() => onPage(current + 1)}><ChevronRight size={16} /></button>
+      <button type="button" className="secondary" title="Halaman terakhir" aria-label={`${label}: halaman terakhir`} disabled={current >= last} onClick={() => onPage(last)}><ChevronsRight size={16} /></button>
+    </nav>
+  </div>;
 }
 
 function WishTable({ wishes, onSelect }: { wishes: WishRecord[]; onSelect?: (wish: WishRecord) => void }) {
