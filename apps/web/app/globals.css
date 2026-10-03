@@ -1345,3 +1345,11 @@ summary { cursor: pointer; color: #c1d5b9; padding: 6px 0; }
 .password-form { max-width: 420px; }
 @media (max-width: 1000px) { .session-bar { margin-left: 0; } }
 @media (max-width: 560px) { .auth-card { padding: 24px; } .session-bar { padding: 16px 20px; gap: 12px; } }
+.build-comparison-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin:20px 0; }
+.build-comparison-stats > div { display:grid; gap:6px; padding:14px; border:1px solid #385449; border-radius:10px; }
+.build-comparison-stats small { color:var(--muted); }
+.build-comparison-stats span { font-size:13px; color:#dcc38a; }
+.companion-status { display:flex; flex-wrap:wrap; gap:14px; align-items:center; font-size:13px; margin:16px 0; }
+.build-sync-steps { display:flex; flex-wrap:wrap; gap:12px 28px; padding-left:20px; font-size:13px; }
+.build-findings ol { padding-left:20px; }
+.build-findings ol li { margin:12px 0; }

@@ -24,3 +24,11 @@ Automated checks cover backend ownership, capability replay/expiry/cancellation,
 API implementation reference: [genshin.py Battle Chronicle client](https://github.com/seriaati/genshin.py/blob/master/genshin/client/components/chronicle/genshin.py).
 
 Protocol fix in v1.1.1: dispatch uses the parsed URI host and accepts the optional slash inserted by browsers before the query. Run `IrminsulSync.exe --verify-protocol` to check build/wish dispatch and invalid links without making network requests.
+
+## Character atelier tools
+
+All catalog entries have DPS/on-field, support/off-field, and reaction-trigger target editors. Manual roles start with empty targets, do not inherit another character's recipe, and allow CR/CD, ER, ATK, EM, HP and DEF. Automatic profiles are limited to existing sourced recipes and explicitly curated variants. Raiden's Hyperbloom variant follows the linked KQM quick guide (version 5.7); level/EM priorities and weapon options differ from Burst DPS. This does not claim automatic recommendations for every character and team.
+
+Filters include catalog/synced roster, element and weapon type. Up to three upgrade findings are shown first, with remaining notes expandable. Snapshot comparisons include stat deltas, weapons and artifact changes. The previous successful HoYoLAB snapshot is retained server-side for the owner; failed uploads do not rotate it. Deploy the new migration on Railway before using comparison on Vercel. Existing accounts acquire their first comparison after a new successful sync.
+
+Companion v1.1.1 remains supported. The web shows the minimum version, a download link, session creation and actual companion connection. Per-character reading progress remains in the companion terminal; the web does not estimate a percentage or claim it detected the installed version.

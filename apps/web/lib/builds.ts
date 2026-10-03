@@ -40,4 +40,4 @@ export const slots=['EQUIP_BRACER','EQUIP_NECKLACE','EQUIP_SHOES','EQUIP_RING','
 export const slotNames=['Flower','Plume','Sands','Goblet','Circlet'];
 export const statLabels: Record<string,string>={hp:'Max HP',atk:'ATK',def:'DEF',em:'Elemental Mastery',cr:'CRIT Rate',cd:'CRIT DMG',er:'Energy Recharge',atkPct:'ATK bonus %',heal:'Healing Bonus',element:'Elemental DMG Bonus'};
 export const formatStat=(key:string,value:number) => ['hp','atk','def','em'].includes(key) ? Math.round(value).toLocaleString('en-US') : `${value.toFixed(1)}%`;
-export function weaponEntry(key: string) {return Object.values(items).find(e=>e.kind==='weapons' && slug(e.name)===key);}
+export function weaponEntry(key: string) {const normalize=(value:string)=>slug(value).replace(/['’“”"]/g,'');return Object.values(items).find(e=>e.kind==='weapons' && normalize(e.name)===normalize(key));}

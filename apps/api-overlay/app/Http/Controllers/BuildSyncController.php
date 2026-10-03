@@ -42,13 +42,18 @@ class BuildSyncController extends Controller
     {
         $session = $this->session($token);
         abort_if($session->status !== 'waiting', 409);
+        DB::table('build_sync_sessions')->where('id', $session->id)->where('status', 'waiting')
+            ->update(['message' => 'Companion terhubung. Login HoYoLAB lalu tunggu pembacaan build dan unggahan selesai.', 'updated_at' => now()]);
         return response()->json(['uid' => GenshinAccount::findOrFail($session->genshin_account_id)->uid]);
     }
 
     public function snapshot(string $uid)
     {
         $account = GenshinAccount::where('user_id', auth()->id())->where('uid', $uid)->firstOrFail();
-        return response()->json(['snapshot' => json_decode($account->getRawOriginal('build_snapshot') ?? 'null', true), 'fetched_at' => $account->build_synced_at]);
+        return response()->json([
+            'snapshot' => json_decode($account->getRawOriginal('build_snapshot') ?? 'null', true), 'fetched_at' => $account->build_synced_at,
+            'previous_snapshot' => json_decode($account->getRawOriginal('previous_build_snapshot') ?? 'null', true), 'previous_fetched_at' => $account->previous_build_synced_at,
+        ]);
     }
 
     public function fail(string $token)
@@ -170,7 +175,10 @@ class BuildSyncController extends Controller
             abort_if(DB::table('build_sync_sessions')->where('genshin_account_id', $account->id)
                 ->where('id', '>', $locked->id)->where('status', 'completed')->exists(), 409, 'Snapshot lebih baru sudah tersimpan.');
             abort_if($account->build_synced_at && Carbon::parse($account->build_synced_at)->greaterThan($locked->created_at), 409, 'Snapshot lebih baru sudah tersimpan. Mulai sync baru.');
-            $account->forceFill(['build_snapshot' => json_encode($snapshot), 'build_synced_at' => now()])->save();
+            $account->forceFill([
+                'previous_build_snapshot' => $account->getRawOriginal('build_snapshot'), 'previous_build_synced_at' => $account->build_synced_at,
+                'build_snapshot' => json_encode($snapshot), 'build_synced_at' => now(),
+            ])->save();
             DB::table('build_sync_sessions')->where('id', $locked->id)->update(['status' => 'completed', 'message' => count($snapshot['characters']).' build karakter disimpan.', 'updated_at' => now()]);
             return response()->json(['status' => 'completed']);
         });

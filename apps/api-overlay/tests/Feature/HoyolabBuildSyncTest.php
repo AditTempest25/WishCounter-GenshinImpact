@@ -140,4 +140,24 @@ class HoyolabBuildSyncTest extends TestCase
         $this->postJson('/api/build-sync-sessions/'.$older.'/failed')->assertOk();
         $this->getJson('/api/accounts/800001234/hoyolab-builds')->assertJsonPath('snapshot.characters.0.base.level', 90);
     }
+
+    public function test_previous_snapshot_rotates_only_after_successful_upload(): void
+    {
+        $first = $this->begin();
+        $this->getJson('/api/build-sync-sessions/'.$first.'/target')->assertOk();
+        $this->getJson('/api/build-sync-sessions/'.$first)->assertJsonPath('status', 'waiting')
+            ->assertJsonPath('message', 'Companion terhubung. Login HoYoLAB lalu tunggu pembacaan build dan unggahan selesai.');
+        $this->postJson('/api/build-sync-sessions/'.$first.'/builds', $this->fixture())->assertOk();
+        $this->getJson('/api/accounts/800001234/hoyolab-builds')->assertJsonPath('previous_snapshot', null);
+        $this->travel(2)->seconds();
+        $second = $this->postJson('/api/accounts/800001234/build-sync')->assertCreated()->json('token');
+        $data = $this->fixture(); $data['characters'][0]['base']['level'] = 80;
+        $this->postJson('/api/build-sync-sessions/'.$second.'/builds', $data)->assertOk();
+        $this->getJson('/api/accounts/800001234/hoyolab-builds')->assertOk()
+            ->assertJsonPath('snapshot.characters.0.base.level', 80)
+            ->assertJsonPath('previous_snapshot.characters.0.base.level', 90);
+        $third = $this->postJson('/api/accounts/800001234/build-sync')->assertCreated()->json('token');
+        $this->postJson('/api/build-sync-sessions/'.$third.'/failed')->assertOk();
+        $this->getJson('/api/accounts/800001234/hoyolab-builds')->assertJsonPath('previous_snapshot.characters.0.base.level', 90);
+    }
 }
