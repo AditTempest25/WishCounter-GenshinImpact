@@ -73,7 +73,7 @@ class BuildSyncController extends Controller
     {
         $session = $this->session($token);
         abort_if(strlen($request->getContent()) > 2 * 1024 * 1024, 413);
-        $data = $request->validate([
+        $validator = validator($request->all(), [
             'uid' => ['required', 'string', 'regex:/^[0-9]{6,20}$/'],
             'characters' => ['required', 'array', 'min:1', 'max:200'],
             'characters.*' => ['required', 'array'],
@@ -104,6 +104,15 @@ class BuildSyncController extends Controller
             'characters.*.relics.*.set' => ['sometimes', 'array'],
             'characters.*.relics.*.set.name' => ['sometimes', 'string', 'max:100'],
         ]);
+        if ($validator->fails()) {
+            // Expose field names only, never payload values or login credentials.
+            $fields = array_slice(array_keys($validator->errors()->messages()), 0, 3);
+            $message = 'Format build ditolak: '.implode(', ', $fields).'.';
+            DB::table('build_sync_sessions')->where('id', $session->id)->where('status', 'waiting')
+                ->update(['status' => 'failed', 'message' => substr($message, 0, 255), 'updated_at' => now()]);
+            return response()->json(['message' => $message, 'fields' => $fields], 422);
+        }
+        $data = $validator->validated();
         // Reject nested credentials and non-scalar values rather than serializing them.
         $scalarFields = ['id', 'level', 'actived_constellation_num', 'fetter', 'element', 'name', 'rarity', 'affix_level', 'pos', 'skill_id', 'skill_type', 'property_type', 'base', 'add', 'final', 'value'];
         $check = function ($node, $path = '') use (&$check, $scalarFields) {
@@ -111,7 +120,9 @@ class BuildSyncController extends Controller
                 if ($key === 'base' && preg_match('/^characters\.\d+$/', $path)) {
                     $check($value, $path.'.base');
                 } elseif (in_array($key, $scalarFields, true)) {
-                    abort_if(!is_scalar($value) || strlen((string) $value) > 150, 422, 'Nilai build tidak valid.');
+                    // HoYoLAB uses empty strings for inapplicable base/add values.
+                    // Laravel's ConvertEmptyStringsToNull middleware normalizes them to null.
+                    abort_if($value !== null && (!is_scalar($value) || strlen((string) $value) > 150), 422, 'Nilai build tidak valid.');
                 } elseif (is_array($value)) {
                     $check($value, $path === '' ? (string) $key : $path.'.'.$key);
                 }

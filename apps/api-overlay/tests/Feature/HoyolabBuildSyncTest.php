@@ -76,6 +76,31 @@ class HoyolabBuildSyncTest extends TestCase
         $this->getJson('/api/build-sync-sessions/'.$token.'/target')->assertConflict();
     }
 
+    public function test_empty_optional_stat_values_from_hoyolab_are_accepted(): void
+    {
+        $token = $this->begin();
+        $data = $this->fixture();
+        $data['characters'][0]['base_properties'][0]['base'] = '';
+        $data['characters'][0]['base_properties'][0]['add'] = '';
+        $data['characters'][0]['weapon']['main_property'] = ['property_type' => 1, 'value' => '608', 'base' => null];
+        $data['characters'][0]['weapon']['icon'] = '';
+        $this->postJson('/api/build-sync-sessions/'.$token.'/builds', $data)->assertOk();
+        $this->getJson('/api/accounts/800001234/hoyolab-builds')->assertOk()
+            ->assertJsonPath('snapshot.characters.0.base_properties.0.base', null)
+            ->assertJsonPath('snapshot.characters.0.base_properties.0.final', '1000');
+    }
+
+    public function test_validation_diagnostics_include_only_field_names(): void
+    {
+        $token = $this->begin();
+        $data = $this->fixture(); $data['characters'][0]['base']['level'] = 'private-invalid-value';
+        $response = $this->postJson('/api/build-sync-sessions/'.$token.'/builds', $data)->assertUnprocessable();
+        $this->assertStringNotContainsString('private-invalid-value', $response->getContent());
+        $this->getJson('/api/build-sync-sessions/'.$token)->assertOk()->assertJsonPath('status', 'failed');
+        $this->assertStringContainsString('base.level', $response->json('message'));
+        $this->assertNull(DB::table('genshin_accounts')->value('build_snapshot'));
+    }
+
     public function test_failed_and_older_sessions_keep_the_new_snapshot(): void
     {
         $older = $this->begin();
