@@ -36,7 +36,7 @@ export default function HoyolabBuildSync({ uid, onLoaded }: { uid: string|null; 
       const created = await response.json();
       if (!response.ok) throw new Error(created.message ?? 'Sesi build gagal dibuat.');
       if (controller.signal.aborted) return;
-      setSession(created); setMessage('Login di jendela companion, lalu klik Sync this account. Gunakan companion v1.1 atau lebih baru.');
+      setSession(created); setMessage('Login di jendela companion, lalu klik Sync this account. Gunakan companion v1.1.1 atau lebih baru.');
       window.location.href = created.protocol_uri;
       while (!controller.signal.aborted) {
         await new Promise<void>((resolve,reject) => { const onAbort = () => {clearTimeout(timer);reject(new DOMException('Aborted','AbortError'));}; const timer = setTimeout(()=>{controller.signal.removeEventListener('abort',onAbort);resolve();},2000);controller.signal.addEventListener('abort',onAbort,{once:true}); });
@@ -51,7 +51,7 @@ export default function HoyolabBuildSync({ uid, onLoaded }: { uid: string|null; 
     finally { if (request.current === controller) setBusy(false); }
   }
   return <div className="utility-panel hoyolab-connect"><div className="section-heading"><div><h3>Semua build dari HoYoLAB</h3><p className="subtle">Login langsung di companion Windows. Tidak perlu memajang karakter di showcase.</p></div><button className="primary" disabled={!uid||busy} onClick={start}>{busy?'Menunggu companion…':'Sync HoYoLAB'}</button></div>
-    <p className="data-note">Gunakan companion v1.1+. Cookie login tetap di PC, sesi jendela bersifat InPrivate. Hanya data karakter, senjata, artefak, dan stat yang disimpan di akun Irminsul. <a href="https://github.com/AditTempest25/WishCounter-GenshinImpact/releases/tag/companion-v1.1.0" target="_blank" rel="noreferrer">Companion v1.1 ↗</a></p>
+    <p className="data-note">Gunakan companion v1.1.1+. Cookie login tetap di PC, sesi jendela bersifat InPrivate. Hanya data karakter, senjata, artefak, dan stat yang disimpan di akun Irminsul. <a href="https://github.com/AditTempest25/WishCounter-GenshinImpact/releases/tag/companion-v1.1.1" target="_blank" rel="noreferrer">Companion v1.1.1 ↗</a></p>
     {message && <p role="status">{message}</p>}{error && <p role="alert" className="build-notice">{error}</p>}
     {session && <div className="tool-actions"><a className="secondary" href={session.protocol_uri}>Buka companion lagi</a><button className="text-button" onClick={cancel}>Batalkan</button></div>}
   </div>;

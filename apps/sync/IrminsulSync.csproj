@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>IrminsulSync</AssemblyName>
     <RootNamespace>IrminsulSync</RootNamespace>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>

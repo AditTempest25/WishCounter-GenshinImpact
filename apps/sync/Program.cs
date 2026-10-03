@@ -23,20 +23,24 @@ internal static class Program
     public static async Task<int> Main(string[] args)
     {
         string? sessionToken = null;
+        bool isBuild = false;
+        if (args.Length == 1 && args[0] == "--verify-protocol") return SyncLaunch.Verify();
         Console.Title = "Irminsul Sync";
-        Console.WriteLine("Irminsul Sync v1.1.0");
+        Console.WriteLine("Irminsul Sync v1.1.1");
         Console.WriteLine("-----------------------");
 
         try
         {
-            sessionToken = GetSessionToken(args);
+            var launch = SyncLaunch.Parse(args);
+            sessionToken = launch?.Token;
+            isBuild = launch?.IsBuild ?? false;
             if (string.IsNullOrWhiteSpace(sessionToken))
             {
                 Console.Error.WriteLine("Missing sync session. Launch this app from the Irminsul Wish web dashboard.");
                 return 2;
             }
 
-            if (args.Any(arg => arg.StartsWith("irminsul://builds?", StringComparison.OrdinalIgnoreCase)))
+            if (isBuild)
             {
                 await HoyolabBuildSync.RunAsync(GetApiBase(), sessionToken);
                 Console.WriteLine("Build sync completed. Return to Character builds.");
@@ -106,7 +110,7 @@ internal static class Program
         }
         catch (Exception ex)
         {
-            if (sessionToken is not null && !args.Any(arg => arg.StartsWith("irminsul://builds?", StringComparison.OrdinalIgnoreCase))) await ReportProgress(sessionToken, "failed");
+            if (sessionToken is not null && !isBuild) await ReportProgress(sessionToken, "failed");
             Console.Error.WriteLine();
             Console.Error.WriteLine($"Sync failed: {ex.Message}");
             KeepErrorVisible();
@@ -148,27 +152,6 @@ internal static class Program
     {
         string[] names = ["GenshinImpact", "YuanShen"];
         return names.Any(name => Process.GetProcessesByName(name).Length > 0);
-    }
-
-    private static string? GetSessionToken(string[] args)
-    {
-        foreach (var arg in args)
-        {
-            if (arg.StartsWith("irminsul://", StringComparison.OrdinalIgnoreCase))
-            {
-                var uri = new Uri(arg);
-                var query = QueryString.Parse(uri.Query);
-                return query.GetValueOrDefault("session");
-            }
-        }
-
-        for (var i = 0; i < args.Length - 1; i++)
-        {
-            if (args[i].Equals("--session", StringComparison.OrdinalIgnoreCase))
-                return args[i + 1];
-        }
-
-        return null;
     }
 
     private static void KeepErrorVisible()
